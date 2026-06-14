@@ -28,8 +28,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;height:64px;d
 nav.scrolled{background:var(--white);box-shadow:0 2px 20px rgba(0,0,0,.08)}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white)}
 nav.scrolled .nav-logo{color:var(--tx)}
-.nav-logo-icon{width:36px;height:36px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid rgba(255,255,255,.3)}
-nav.scrolled .nav-logo-icon{background:var(--grad);border:none}
+.nav-logo-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center}
 .nav-logo-name{font-weight:700;font-size:16px}
 .nav-btn{background:var(--white);color:var(--p);border:none;padding:10px 22px;border-radius:10px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 2px 12px rgba(0,0,0,.12)}
 nav.scrolled .nav-btn{background:var(--grad);color:var(--white);box-shadow:0 2px 12px rgba(181,70,69,.3)}
@@ -221,7 +220,26 @@ footer p{margin-bottom:10px}
 <!-- ── NAV ── -->
 <nav id="nav">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-icon">🏡</div>
+    <div class="nav-logo-icon">
+      <!-- logo: versión blanca sobre hero, terracota al scrollear -->
+      <svg class="logo-svg" width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#B54645"/><stop offset="1" stop-color="#D4796A"/>
+          </linearGradient>
+        </defs>
+        <!-- casa: paredes -->
+        <path d="M18 52V82H82V52" stroke="url(#g1)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- casa: techo izquierdo -->
+        <path d="M18 52L50 22" stroke="url(#g1)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- casa: techo derecho (hasta donde arranca la llave) -->
+        <path d="M50 22L68 38" stroke="url(#g1)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- tilde dentro de la casa -->
+        <path d="M32 58L44 72L68 46" stroke="url(#g1)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- llave inglesa (wrench) arriba a la derecha -->
+        <path d="M72 14 C66 14 62 18 62 24 C62 27 63 29.5 65 31.5 L54 43 L58 47 L69 36 C71 37.5 73.5 38.5 76 38 C82 37 86 32 85 26 L79 32 L76 29 L82 23 C80 17.5 76.5 14 72 14Z" fill="url(#g1)"/>
+      </svg>
+    </div>
     <span class="nav-logo-name">Lo Que Precisés</span>
   </a>
   <a href="#registro" class="nav-btn">Registrarme</a>
@@ -467,7 +485,14 @@ footer p{margin-bottom:10px}
 <!-- ── FOOTER ── -->
 <footer>
   <div class="foot-logo">
-    <div class="foot-logo-icon">🏡</div>
+    <svg width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="gf" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#B54645"/><stop offset="1" stop-color="#D4796A"/></linearGradient></defs>
+      <path d="M18 52V82H82V52" stroke="url(#gf)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M18 52L50 22" stroke="url(#gf)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M50 22L68 38" stroke="url(#gf)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M32 58L44 72L68 46" stroke="url(#gf)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M72 14 C66 14 62 18 62 24 C62 27 63 29.5 65 31.5 L54 43 L58 47 L69 36 C71 37.5 73.5 38.5 76 38 C82 37 86 32 85 26 L79 32 L76 29 L82 23 C80 17.5 76.5 14 72 14Z" fill="url(#gf)"/>
+    </svg>
     <span class="foot-logo-name">Lo Que Precisés</span>
   </div>
   <p>Montevideo, Uruguay</p>
