@@ -28,8 +28,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;height:64px;d
 nav.scrolled{background:var(--white);box-shadow:0 2px 20px rgba(0,0,0,.08)}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white)}
 nav.scrolled .nav-logo{color:var(--tx)}
-.nav-logo-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center}
-nav.scrolled .nav-logo-icon{}
+.nav-logo-icon{width:36px;height:36px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;border:1px solid rgba(255,255,255,.3)}
+nav.scrolled .nav-logo-icon{background:var(--grad);border:none}
 .nav-logo-name{font-weight:700;font-size:16px}
 .nav-btn{background:var(--white);color:var(--p);border:none;padding:10px 22px;border-radius:10px;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 2px 12px rgba(0,0,0,.12)}
 nav.scrolled .nav-btn{background:var(--grad);color:var(--white);box-shadow:0 2px 12px rgba(181,70,69,.3)}
@@ -221,18 +221,7 @@ footer p{margin-bottom:10px}
 <!-- ── NAV ── -->
 <nav id="nav">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-icon">
-      <svg width="36" height="36" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs><linearGradient id="lg-nav" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse"><stop stop-color="#B54645"/><stop offset="1" stop-color="#D4796A"/></linearGradient></defs>
-        <!-- house -->
-        <path d="M12 38L40 14L68 38" stroke="url(#lg-nav)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M20 32V64H60V32" stroke="url(#lg-nav)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- checkmark -->
-        <path d="M28 46L36 54L52 36" stroke="url(#lg-nav)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- wrench -->
-        <path d="M56 20C53 17 48.5 17.5 46 21C43.5 24.5 44.5 29 47 31L36 44L39 47L52 34C55 36.5 59.5 36.5 62 34C64.5 31.5 64.5 27 62 24L58 28L56 26L60 22L56 20Z" fill="url(#lg-nav)"/>
-      </svg>
-    </div>
+    <div class="nav-logo-icon">🏡</div>
     <span class="nav-logo-name">Lo Que Precisés</span>
   </a>
   <a href="#registro" class="nav-btn">Registrarme</a>
@@ -242,17 +231,7 @@ footer p{margin-bottom:10px}
 <section id="hero">
   <canvas class="hero-canvas" id="heroCanvas"></canvas>
   <div class="hero-content">
-    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:24px">
-    <svg width="44" height="44" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs><linearGradient id="lg-hero" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse"><stop stop-color="rgba(255,255,255,0.9)"/><stop offset="1" stop-color="rgba(255,255,255,0.6)"/></linearGradient></defs>
-      <path d="M12 38L40 14L68 38" stroke="url(#lg-hero)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M20 32V64H60V32" stroke="url(#lg-hero)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M28 46L36 54L52 36" stroke="url(#lg-hero)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M56 20C53 17 48.5 17.5 46 21C43.5 24.5 44.5 29 47 31L36 44L39 47L52 34C55 36.5 59.5 36.5 62 34C64.5 31.5 64.5 27 62 24L58 28L56 26L60 22L56 20Z" fill="url(#lg-hero)"/>
-    </svg>
-    <span style="font-size:22px;font-weight:800;color:#fff">Lo Que Precisés</span>
-  </div>
-  <div class="hero-tag"><span></span>Lanzamiento en Montevideo</div>
+    <div class="hero-tag"><span></span>Lanzamiento en Montevideo</div>
     <h1>Si ofrecés un servicio del hogar en Montevideo, esto es para vos</h1>
     <p>Conseguí clientes nuevos sin depender del boca a boca</p>
     <a href="#registro" class="hero-cta">Quiero registrarme gratis</a>
@@ -488,13 +467,7 @@ footer p{margin-bottom:10px}
 <!-- ── FOOTER ── -->
 <footer>
   <div class="foot-logo">
-    <svg width="38" height="38" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs><linearGradient id="lg-foot" x1="0" y1="0" x2="80" y2="80" gradientUnits="userSpaceOnUse"><stop stop-color="#B54645"/><stop offset="1" stop-color="#D4796A"/></linearGradient></defs>
-      <path d="M12 38L40 14L68 38" stroke="url(#lg-foot)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M20 32V64H60V32" stroke="url(#lg-foot)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M28 46L36 54L52 36" stroke="url(#lg-foot)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M56 20C53 17 48.5 17.5 46 21C43.5 24.5 44.5 29 47 31L36 44L39 47L52 34C55 36.5 59.5 36.5 62 34C64.5 31.5 64.5 27 62 24L58 28L56 26L60 22L56 20Z" fill="url(#lg-foot)"/>
-    </svg>
+    <div class="foot-logo-icon">🏡</div>
     <span class="foot-logo-name">Lo Que Precisés</span>
   </div>
   <p>Montevideo, Uruguay</p>
