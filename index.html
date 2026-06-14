@@ -221,23 +221,24 @@ footer p{margin-bottom:10px}
 <nav id="nav">
   <a href="#" class="nav-logo">
     <div class="nav-logo-icon">
-      <!-- logo: versión blanca sobre hero, terracota al scrollear -->
-      <svg class="logo-svg" width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="g1" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#B54645"/><stop offset="1" stop-color="#D4796A"/>
+          <linearGradient id="gN" x1="85" y1="10" x2="15" y2="90" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#D4796A"/><stop offset="1" stop-color="#B54645"/>
           </linearGradient>
         </defs>
-        <!-- casa: paredes -->
-        <path d="M18 52V82H82V52" stroke="url(#g1)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- casa: techo izquierdo -->
-        <path d="M18 52L50 22" stroke="url(#g1)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- casa: techo derecho (hasta donde arranca la llave) -->
-        <path d="M50 22L68 38" stroke="url(#g1)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- tilde dentro de la casa -->
-        <path d="M32 58L44 72L68 46" stroke="url(#g1)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- llave inglesa (wrench) arriba a la derecha -->
-        <path d="M72 14 C66 14 62 18 62 24 C62 27 63 29.5 65 31.5 L54 43 L58 47 L69 36 C71 37.5 73.5 38.5 76 38 C82 37 86 32 85 26 L79 32 L76 29 L82 23 C80 17.5 76.5 14 72 14Z" fill="url(#g1)"/>
+        <!-- paredes U -->
+        <path d="M16 56V85H84V56" stroke="url(#gN)" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- techo izq -->
+        <path d="M16 56L50 23" stroke="url(#gN)" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- techo der (hasta la llave) -->
+        <path d="M84 56L67 39" stroke="url(#gN)" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- tilde -->
+        <path d="M27 63L44 80L76 44" stroke="url(#gN)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- llave: mango diagonal -->
+        <path d="M67 39L57 50" stroke="url(#gN)" stroke-width="8.5" stroke-linecap="round"/>
+        <!-- llave: cabeza (arco ~270°) -->
+        <path d="M80 12 A14 14 0 1 0 93 28" stroke="url(#gN)" stroke-width="8" stroke-linecap="round" fill="none"/>
       </svg>
     </div>
     <span class="nav-logo-name">Lo Que Precisés</span>
@@ -486,12 +487,13 @@ footer p{margin-bottom:10px}
 <footer>
   <div class="foot-logo">
     <svg width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs><linearGradient id="gf" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#B54645"/><stop offset="1" stop-color="#D4796A"/></linearGradient></defs>
-      <path d="M18 52V82H82V52" stroke="url(#gf)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M18 52L50 22" stroke="url(#gf)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M50 22L68 38" stroke="url(#gf)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M32 58L44 72L68 46" stroke="url(#gf)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M72 14 C66 14 62 18 62 24 C62 27 63 29.5 65 31.5 L54 43 L58 47 L69 36 C71 37.5 73.5 38.5 76 38 C82 37 86 32 85 26 L79 32 L76 29 L82 23 C80 17.5 76.5 14 72 14Z" fill="url(#gf)"/>
+      <defs><linearGradient id="gF" x1="85" y1="10" x2="15" y2="90" gradientUnits="userSpaceOnUse"><stop stop-color="#D4796A"/><stop offset="1" stop-color="#B54645"/></linearGradient></defs>
+      <path d="M16 56V85H84V56" stroke="url(#gF)" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M16 56L50 23" stroke="url(#gF)" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M84 56L67 39" stroke="url(#gF)" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M27 63L44 80L76 44" stroke="url(#gF)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M67 39L57 50" stroke="url(#gF)" stroke-width="8.5" stroke-linecap="round"/>
+      <path d="M80 12 A14 14 0 1 0 93 28" stroke="url(#gF)" stroke-width="8" stroke-linecap="round" fill="none"/>
     </svg>
     <span class="foot-logo-name">Lo Que Precisés</span>
   </div>
