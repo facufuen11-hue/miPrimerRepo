@@ -5,1466 +5,935 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Heladería Los Trovadores — La esquina más helada del país</title>
   <meta name="description" content="Heladería Los Trovadores, más de 70 años en Pocitos, Montevideo. Helados para todos: aptos diabéticos, sin TACC, veganos. Gabriel Pereira 3202 esquina Berro." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            pistacho: '#A8D5BA',
-            menta: '#5B8C6E',
-            crema: '#FFFDF7',
-            chocolate: '#3D2B1F',
-            'chocolate-light': '#6B4A36',
-          },
-          fontFamily: {
-            display: ['Fraunces', 'Georgia', 'serif'],
-            body: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-          },
-          keyframes: {
-            fadeInUp: {
-              '0%': { opacity: '0', transform: 'translateY(24px)' },
-              '100%': { opacity: '1', transform: 'translateY(0)' },
-            },
-            fadeIn: {
-              '0%': { opacity: '0' },
-              '100%': { opacity: '1' },
-            },
-            scoop: {
-              '0%': { transform: 'scale(0.4) translateY(20px)', opacity: '0' },
-              '100%': { transform: 'scale(1) translateY(0)', opacity: '1' },
-            },
-            spin: {
-              '0%': { transform: 'rotate(0deg)' },
-              '100%': { transform: 'rotate(360deg)' },
-            },
-          },
-          animation: {
-            'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
-            'fade-in': 'fadeIn 0.5s ease-out forwards',
-            'scoop-drop': 'scoop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
-          },
-        },
-      },
-    };
-  </script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
+    /* ---- Reset & Base ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --pistacho: #A8D5BA;
+      --menta: #5B8C6E;
+      --menta-dark: #3d6b53;
+      --crema: #FFFDF7;
+      --white: #FFFFFF;
+      --choco: #3D2B1F;
+      --choco-light: #6B4A36;
+      --gray: #f0ede6;
+      --gray2: #c8c2b8;
+    }
     html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      background-color: #FFFDF7;
-      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-      color: #3D2B1F;
+      background: var(--crema);
+      color: var(--choco);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
-    .font-display { font-family: 'Fraunces', Georgia, serif; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
 
-    /* Focus rings for accessibility */
-    *:focus-visible {
-      outline: 2px solid #5B8C6E;
-      outline-offset: 3px;
-      border-radius: 4px;
-    }
+    /* ---- Typography ---- */
+    .display { font-family: Georgia, 'Times New Roman', serif; }
+    h1, h2, h3 { font-family: Georgia, 'Times New Roman', serif; line-height: 1.15; }
 
-    /* Reduced motion */
+    /* ---- Layout helpers ---- */
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 1.25rem; }
+    .section { padding: 5rem 0; }
+    .section-sm { padding: 3rem 0; }
+    .text-center { text-align: center; }
+    .flex { display: flex; }
+    .grid { display: grid; }
+
+    /* ---- Accessibility ---- */
+    *:focus-visible { outline: 2px solid var(--menta); outline-offset: 3px; border-radius: 4px; }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
 
-    /* Cone fill animation */
-    @keyframes fillUp {
-      from { clip-path: inset(100% 0 0 0); opacity: 0; }
-      to { clip-path: inset(0% 0 0 0); opacity: 1; }
+    /* ======== NAVBAR ======== */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,253,247,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(91,140,110,0.15);
+      transition: box-shadow 0.3s;
     }
-    .scoop-animate {
-      animation: scoop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    #navbar.scrolled { box-shadow: 0 2px 20px rgba(61,43,31,0.1); }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; padding: 0 1.25rem; max-width: 1140px; margin: 0 auto;
     }
-    @keyframes scoop {
-      from { transform: scale(0.3) translateY(30px); opacity: 0; }
-      to   { transform: scale(1) translateY(0); opacity: 1; }
+    .nav-logo {
+      font-family: Georgia, serif; font-size: 1.35rem; font-weight: 700;
+      color: var(--menta); letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--choco); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--choco-light); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--menta); }
+    .btn-nav {
+      background: var(--menta); color: #fff; padding: 0.5rem 1.25rem;
+      border-radius: 100px; font-size: 0.88rem; font-weight: 600;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-nav:hover { background: var(--menta-dark); transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 6px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--choco); border-radius: 2px; transition: 0.3s; }
+    #mobile-menu {
+      display: none; flex-direction: column; gap: 0;
+      background: var(--crema); border-top: 1px solid var(--gray);
+      padding: 1rem 1.25rem 1.5rem;
+    }
+    #mobile-menu.open { display: flex; }
+    #mobile-menu a {
+      padding: 0.75rem 0; font-size: 1rem; font-weight: 500;
+      color: var(--choco); border-bottom: 1px solid var(--gray);
+    }
+    #mobile-menu .btn-nav { margin-top: 1rem; text-align: center; display: block; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
     }
 
-    /* Gradient hero */
-    .hero-bg {
-      background: linear-gradient(135deg, #5B8C6E 0%, #3D5C48 40%, #2A3D31 100%);
+    /* ======== HERO ======== */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      background: linear-gradient(135deg, #1a3d2b 0%, #2d5c42 40%, #3d6b53 100%);
+      padding: 7rem 1.25rem 4rem; position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(168,213,186,0.12) 0%, transparent 60%);
+    }
+    .hero-inner { max-width: 1140px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(168,213,186,0.18); border: 1px solid rgba(168,213,186,0.35);
+      color: var(--pistacho); padding: 0.4rem 1rem; border-radius: 100px;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: Georgia, serif; font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700; color: #fff; line-height: 1.05; margin-bottom: 1.5rem;
+      max-width: 800px;
+    }
+    .hero-title em { color: var(--pistacho); font-style: italic; }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.75);
+      max-width: 520px; margin-bottom: 2.5rem; line-height: 1.7;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .btn-primary {
+      background: var(--pistacho); color: var(--choco); padding: 0.85rem 2rem;
+      border-radius: 100px; font-weight: 700; font-size: 1rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 15px rgba(168,213,186,0.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(168,213,186,0.5); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.4); color: #fff; padding: 0.85rem 2rem;
+      border-radius: 100px; font-weight: 600; font-size: 1rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+    .hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+    .hero-stat { color: rgba(255,255,255,0.85); }
+    .hero-stat strong { display: block; font-size: 1.6rem; color: var(--pistacho); font-family: Georgia, serif; }
+    .hero-stat span { font-size: 0.82rem; opacity: 0.8; }
+
+    /* ADU badge floating */
+    .adu-float {
+      position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+      width: 160px; height: 160px;
+    }
+    @media (max-width: 900px) { .adu-float { display: none; } }
+
+    /* ======== SECTION HEADER ======== */
+    .section-tag {
+      display: inline-block; background: var(--pistacho); color: var(--menta-dark);
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.3rem 0.85rem; border-radius: 100px; margin-bottom: 1rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--choco);
+      line-height: 1.15; margin-bottom: 1rem;
+    }
+    .section-title em { color: var(--menta); font-style: italic; }
+    .section-sub { font-size: 1.05rem; color: var(--choco-light); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+    /* ======== HELADERIA PARA TODOS ======== */
+    #para-todos { background: #fff; }
+    .todos-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .todos-card {
+      border: 2px solid var(--gray); border-radius: 20px; padding: 2rem;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+      background: var(--crema); position: relative; overflow: hidden;
+    }
+    .todos-card:hover { border-color: var(--pistacho); box-shadow: 0 8px 30px rgba(91,140,110,0.12); transform: translateY(-3px); }
+    .todos-card-icon {
+      width: 64px; height: 64px; border-radius: 16px; display: flex;
+      align-items: center; justify-content: center; font-size: 1.8rem;
+      margin-bottom: 1.25rem;
+    }
+    .todos-card h3 { font-size: 1.25rem; margin-bottom: 0.6rem; }
+    .todos-card p { font-size: 0.92rem; color: var(--choco-light); line-height: 1.6; }
+    .adu-badge-inline {
+      margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(91,140,110,0.12); border: 1.5px solid var(--menta);
+      color: var(--menta); padding: 0.4rem 0.85rem; border-radius: 100px;
+      font-size: 0.8rem; font-weight: 700;
+    }
+    .todos-quote {
+      margin-top: 3rem; text-align: center; padding: 2rem;
+      background: linear-gradient(135deg, var(--pistacho) 0%, #c5e8d4 100%);
+      border-radius: 20px; font-size: 1.15rem; font-style: italic;
+      font-family: Georgia, serif; color: var(--choco); line-height: 1.5;
     }
 
-    /* Card hover */
-    .flavor-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
-    .flavor-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(61,43,31,0.15); }
-
-    /* Navbar blur */
-    .navbar-blur {
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+    /* ======== SABORES ======== */
+    #sabores { background: var(--crema); }
+    .sabores-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.25rem; margin-top: 3rem;
     }
-
-    /* Cone SVG container */
-    .cone-container svg { display: block; }
-
-    /* Step connector */
-    .step-connector {
-      background: linear-gradient(90deg, #A8D5BA, #5B8C6E);
+    .sabor-card {
+      border-radius: 18px; overflow: hidden; background: #fff;
+      box-shadow: 0 2px 12px rgba(61,43,31,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-
-    /* Email preview card */
-    .email-preview {
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      box-shadow: 0 8px 32px rgba(61,43,31,0.12);
-      overflow: hidden;
+    .sabor-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(61,43,31,0.1); }
+    .sabor-swatch {
+      height: 100px; position: relative; display: flex;
+      align-items: flex-end; justify-content: center; padding-bottom: 12px;
     }
+    .sabor-scoop {
+      width: 64px; height: 64px; border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      position: relative; top: 16px;
+      border: 3px solid rgba(255,255,255,0.5);
+    }
+    .sabor-body { padding: 1.25rem 1.25rem 1.25rem; padding-top: 1.5rem; }
+    .sabor-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .sabor-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .tag {
+      font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.6rem;
+      border-radius: 100px; letter-spacing: 0.02em;
+    }
+    .tag-vegano { background: #d4edda; color: #2d6a4f; }
+    .tag-sinTacc { background: #fff3cd; color: #856404; }
+    .tag-diabetico { background: #d1ecf1; color: #0c5460; }
+    .tag-popular { background: var(--choco); color: #fff; }
+    .tag-featured { background: var(--menta); color: #fff; }
 
-    /* Slider styling */
+    /* ======== COMO FUNCIONA ======== */
+    #como-funciona { background: #fff; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 3rem; position: relative; }
+    .step {
+      text-align: center; padding: 2rem 1.5rem; border-radius: 18px;
+      background: var(--crema); border: 2px solid var(--gray);
+    }
+    .step-num {
+      width: 52px; height: 52px; background: var(--menta); color: #fff;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; font-weight: 700; margin: 0 auto 1.25rem; font-family: Georgia, serif;
+    }
+    .step h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .step p { font-size: 0.9rem; color: var(--choco-light); }
+
+    /* ======== MEDIDOR ======== */
+    #medidor { background: linear-gradient(135deg, #1a3d2b 0%, #2d5c42 100%); }
+    .medidor-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    @media (max-width: 768px) { .medidor-inner { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .medidor-text { color: #fff; }
+    .medidor-text .section-tag { background: rgba(168,213,186,0.25); color: var(--pistacho); }
+    .medidor-text .section-title { color: #fff; }
+    .medidor-text .section-title em { color: var(--pistacho); }
+    .medidor-text .section-sub { color: rgba(255,255,255,0.75); }
+    .medidor-demo-box {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 24px; padding: 2rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+    }
+    .demo-user { display: flex; align-items: center; gap: 0.75rem; color: rgba(255,255,255,0.9); align-self: flex-start; }
+    .demo-avatar {
+      width: 40px; height: 40px; background: var(--pistacho); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: var(--choco); font-size: 1rem;
+    }
+    .demo-user-name { font-weight: 600; font-size: 0.95rem; }
+    .demo-user-pts { font-size: 0.8rem; opacity: 0.7; }
+
+    /* Cone SVG wrapper */
+    .cone-wrap { width: 200px; height: 260px; position: relative; }
+    .cone-wrap svg { width: 100%; height: 100%; }
+
+    /* Slider */
+    .slider-wrap { width: 100%; }
+    .slider-label { color: rgba(255,255,255,0.7); font-size: 0.82rem; margin-bottom: 0.5rem; display: block; }
     input[type=range] {
-      -webkit-appearance: none;
-      appearance: none;
-      height: 8px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #A8D5BA var(--val, 0%), #e5e7eb var(--val, 0%));
-      outline: none;
-      cursor: pointer;
+      width: 100%; accent-color: var(--pistacho); height: 6px; border-radius: 3px; cursor: pointer;
     }
-    input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: #5B8C6E;
-      border: 3px solid #fff;
-      box-shadow: 0 2px 8px rgba(91,140,110,0.4);
-      cursor: pointer;
-      transition: transform 0.15s ease;
+    .slider-info {
+      display: flex; justify-content: space-between; margin-top: 0.5rem;
+      font-size: 0.8rem; color: rgba(255,255,255,0.6);
     }
-    input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
-    input[type=range]::-moz-range-thumb {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: #5B8C6E;
-      border: 3px solid #fff;
-      box-shadow: 0 2px 8px rgba(91,140,110,0.4);
-      cursor: pointer;
+    .pts-display {
+      text-align: center; color: #fff; font-family: Georgia, serif;
+      font-size: 2rem; font-weight: 700; line-height: 1;
+    }
+    .pts-display span { font-size: 0.85rem; font-weight: 400; opacity: 0.7; display: block; margin-top: 0.2rem; }
+    .reward-msg {
+      width: 100%; text-align: center; padding: 0.75rem; border-radius: 12px;
+      font-size: 0.88rem; font-weight: 600;
+    }
+    .reward-msg.close { background: rgba(168,213,186,0.2); color: var(--pistacho); }
+    .reward-msg.ready { background: rgba(168,213,186,0.35); color: #a8ffcb; }
+
+    /* ======== SUSCRIPCION ======== */
+    #suscripcion { background: var(--crema); }
+    .suscripcion-wrap {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+      margin-top: 3rem;
+    }
+    @media (max-width: 768px) { .suscripcion-wrap { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--choco-light); }
+    .form-group input {
+      width: 100%; padding: 0.8rem 1rem; border: 2px solid var(--gray);
+      border-radius: 12px; font-size: 1rem; font-family: inherit;
+      background: #fff; color: var(--choco); transition: border-color 0.2s;
+    }
+    .form-group input:focus { outline: none; border-color: var(--menta); }
+    .btn-submit {
+      width: 100%; background: var(--menta); color: #fff;
+      padding: 0.9rem; border-radius: 100px; font-size: 1rem; font-weight: 700;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-submit:hover { background: var(--menta-dark); transform: translateY(-1px); }
+    .form-note { font-size: 0.78rem; color: var(--gray2); margin-top: 0.75rem; text-align: center; }
+    .success-box { display: none; }
+    .success-box.show { display: block; }
+    .form-box.hide { display: none; }
+    .success-inner {
+      text-align: center; padding: 2rem; background: linear-gradient(135deg, #d4edda, #e8f5e9);
+      border-radius: 20px; border: 2px solid var(--pistacho);
+    }
+    .success-icon { font-size: 3rem; margin-bottom: 0.75rem; }
+    .success-inner h3 { font-size: 1.2rem; color: var(--menta); margin-bottom: 0.5rem; }
+    .success-inner p { font-size: 0.9rem; color: var(--choco-light); }
+
+    /* Mock email card */
+    .email-mock {
+      background: #fff; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(61,43,31,0.1); border: 1px solid var(--gray);
+    }
+    .email-header {
+      background: linear-gradient(135deg, var(--menta) 0%, #3d6b53 100%);
+      color: #fff; padding: 1.5rem;
+    }
+    .email-from { font-size: 0.75rem; opacity: 0.75; margin-bottom: 0.25rem; }
+    .email-subject { font-size: 1.1rem; font-weight: 700; }
+    .email-body { padding: 1.5rem; }
+    .email-body p { font-size: 0.88rem; color: var(--choco-light); line-height: 1.6; margin-bottom: 0.75rem; }
+    .email-cta {
+      display: block; background: var(--pistacho); color: var(--choco);
+      text-align: center; padding: 0.75rem; border-radius: 100px;
+      font-weight: 700; font-size: 0.9rem; margin-top: 1rem;
+    }
+    .email-footer-bar { background: var(--gray); padding: 0.75rem 1.5rem; font-size: 0.72rem; color: var(--choco-light); }
+    .email-preview-label { font-size: 0.8rem; color: var(--choco-light); margin-bottom: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* ======== FOOTER ======== */
+    #footer {
+      background: var(--choco); color: rgba(255,255,255,0.8);
+      padding: 4rem 1.25rem 2rem;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2.5rem; max-width: 1140px; margin: 0 auto 3rem;
+    }
+    .footer-logo { font-family: Georgia, serif; font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem; }
+    .footer-tagline { font-size: 0.85rem; opacity: 0.65; margin-bottom: 1rem; }
+    .footer-rating {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px; padding: 0.35rem 0.85rem; font-size: 0.82rem; color: #fff;
+    }
+    .footer-h { font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--pistacho); margin-bottom: 1rem; }
+    .footer-row { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.75rem; font-size: 0.88rem; }
+    .footer-row svg { flex-shrink: 0; margin-top: 2px; }
+    .footer-social { display: flex; gap: 0.75rem; }
+    .social-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: background 0.2s;
+    }
+    .social-btn:hover { background: rgba(168,213,186,0.2); }
+    .footer-adu {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(168,213,186,0.15); border: 1px solid rgba(168,213,186,0.3);
+      color: var(--pistacho); padding: 0.4rem 0.85rem; border-radius: 100px;
+      font-size: 0.78rem; font-weight: 600;
+    }
+    .footer-bottom {
+      max-width: 1140px; margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 1rem;
+      font-size: 0.8rem; opacity: 0.5;
     }
 
-    /* Smooth section fade-in on scroll */
-    .section-reveal {
-      opacity: 0;
-      transform: translateY(20px);
+    /* ======== SCROLL FADE ======== */
+    .fade-in {
+      opacity: 0; transform: translateY(24px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    .section-reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
-  <div id="root"></div>
 
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<!-- NAVBAR -->
+<nav id="navbar" role="navigation" aria-label="Navegación principal">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Los <span>Trovadores</span></a>
+    <ul class="nav-links">
+      <li><a href="#para-todos">Para todos</a></li>
+      <li><a href="#sabores">Sabores</a></li>
+      <li><a href="#medidor">Club de puntos</a></li>
+      <li><a href="#suscripcion">Promociones</a></li>
+      <li><a href="#suscripcion" class="btn-nav">Únete al club</a></li>
+    </ul>
+    <button class="hamburger" id="ham-btn" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div id="mobile-menu" role="menu">
+    <a href="#para-todos">Para todos</a>
+    <a href="#sabores">Sabores</a>
+    <a href="#medidor">Club de puntos</a>
+    <a href="#suscripcion">Promociones</a>
+    <a href="#suscripcion" class="btn-nav">Únete al club</a>
+  </div>
+</nav>
 
-  <script type="text/babel">
-    const { useState, useEffect, useRef, useCallback } = React;
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">&#9733; 4.8 en Google &nbsp;·&nbsp; 7.547 opiniones</div>
+    <h1 class="hero-title">La esquina más <em>helada</em> del país</h1>
+    <p class="hero-sub">Más de 70 años endulzando Pocitos. Helados artesanales para todos: con o sin azúcar, sin TACC, veganos — al mismo precio de siempre.</p>
+    <div class="hero-ctas">
+      <a href="#sabores" class="btn-primary">Ver sabores</a>
+      <a href="#medidor" class="btn-outline">Únete al club de puntos</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>70+</strong><span>años en Pocitos</span></div>
+      <div class="hero-stat"><strong>4.8 ★</strong><span>en Google Maps</span></div>
+      <div class="hero-stat"><strong>ADU</strong><span>aprobado para diabéticos</span></div>
+    </div>
+  </div>
 
-    /* ─── CONSTANTS ─────────────────────────────────────────── */
-    const BRAND = {
-      name: 'Los Trovadores',
-      slogan: 'La esquina más helada del país',
-      address: 'Gabriel Pereira 3202, esquina Berro, Pocitos',
-      city: 'Montevideo, Uruguay',
-      phone: '2707 5165',
-      whatsapp: '+598 98 388 553',
-      whatsappLink: 'https://wa.me/59898388553',
-      email: 'info@lostrovadores.com.uy',
-      hours: 'Todos los días, 11:00 a 00:00 hs',
-      instagram: 'https://instagram.com/heladerialostrovadores',
-      facebook: 'https://facebook.com/heladeria.lostrovadores',
-      instagramHandle: '@heladerialostrovadores',
-      facebookHandle: '@heladeria.lostrovadores',
-      rating: 4.8,
-      reviewCount: '7.547',
-    };
+  <!-- ADU Badge floating SVG -->
+  <div class="adu-float" aria-label="Aprobado por la Asociación de Diabéticos del Uruguay">
+    <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="80" cy="80" r="74" fill="rgba(168,213,186,0.12)" stroke="rgba(168,213,186,0.4)" stroke-width="2"/>
+      <circle cx="80" cy="80" r="62" fill="rgba(168,213,186,0.08)" stroke="rgba(168,213,186,0.25)" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <circle cx="80" cy="80" r="48" fill="rgba(91,140,110,0.3)"/>
+      <text x="80" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#A8D5BA" font-weight="700" letter-spacing="1">APROBADO</text>
+      <text x="80" y="85" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="rgba(168,213,186,0.8)">por la</text>
+      <text x="80" y="99" text-anchor="middle" font-family="Georgia,serif" font-size="13" fill="#A8D5BA" font-weight="700">ADU</text>
+      <text x="80" y="112" text-anchor="middle" font-family="sans-serif" font-size="7" fill="rgba(168,213,186,0.65)" letter-spacing="0.5">Asoc. Diabéticos Uy.</text>
+      <!-- checkmark -->
+      <circle cx="80" cy="40" r="10" fill="rgba(168,213,186,0.3)" stroke="#A8D5BA" stroke-width="1.5"/>
+      <polyline points="75,40 79,44 86,36" stroke="#A8D5BA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+  </div>
+</section>
 
-    const FLAVORS = [
-      {
-        id: 1,
-        name: 'Dulce de Leche Granizado',
-        desc: 'Clásico irresistible con chips de chocolate',
-        gradient: 'linear-gradient(135deg, #C89460 0%, #A0703A 100%)',
-        tags: ['celiaco', 'diabetico'],
-        popular: true,
-      },
-      {
-        id: 2,
-        name: 'Sambayón',
-        desc: 'Cremoso, con notas de huevo y vainilla',
-        gradient: 'linear-gradient(135deg, #F5D78E 0%, #E0B84A 100%)',
-        tags: [],
-        popular: true,
-      },
-      {
-        id: 3,
-        name: 'Chocolate',
-        desc: 'Intenso, con cacao de primera calidad',
-        gradient: 'linear-gradient(135deg, #5C3A1E 0%, #3D2B1F 100%)',
-        tags: ['celiaco'],
-        popular: false,
-      },
-      {
-        id: 4,
-        name: 'Frutilla',
-        desc: 'Natural, con frutillas frescas de temporada',
-        gradient: 'linear-gradient(135deg, #F48FB1 0%, #E91E63 100%)',
-        tags: ['vegano', 'celiaco'],
-        popular: false,
-      },
-      {
-        id: 5,
-        name: 'Limón',
-        desc: 'Refrescante sorbete cítrico, bien intenso',
-        gradient: 'linear-gradient(135deg, #FFF176 0%, #F9A825 100%)',
-        tags: ['vegano', 'celiaco'],
-        popular: false,
-      },
-      {
-        id: 6,
-        name: 'Dulce de Leche',
-        desc: 'El clásico uruguayo, apto para diabéticos',
-        gradient: 'linear-gradient(135deg, #FFCC80 0%, #BF8040 100%)',
-        tags: ['diabetico'],
-        popular: false,
-      },
-      {
-        id: 7,
-        name: 'Maracuyá',
-        desc: 'Tropical y vibrante, perfecto en verano',
-        gradient: 'linear-gradient(135deg, #FFE082 0%, #FF7043 100%)',
-        tags: ['vegano'],
-        popular: false,
-      },
-      {
-        id: 8,
-        name: 'Torta Helada',
-        desc: 'Nuestra especialidad de la casa — encargá la tuya',
-        gradient: 'linear-gradient(135deg, #A8D5BA 0%, #5B8C6E 100%)',
-        tags: [],
-        popular: false,
-        featured: true,
-      },
-    ];
+<!-- HELADERIA PARA TODOS -->
+<section id="para-todos" class="section">
+  <div class="container">
+    <div class="text-center fade-in">
+      <span class="section-tag">Heladería para todos</span>
+      <h2 class="section-title">Mismo helado, <em>mismo precio</em></h2>
+      <p class="section-sub">No existen los helados "especiales". Todos nuestros productos tienen la misma calidad y el mismo precio, sin importar lo que necesites.</p>
+    </div>
+    <div class="todos-grid">
 
-    const TAG_CONFIG = {
-      vegano:   { label: 'Vegano',       icon: '🌿', bg: 'bg-green-100',  text: 'text-green-800'  },
-      celiaco:  { label: 'Sin TACC',     icon: '🌾', bg: 'bg-amber-100',  text: 'text-amber-800'  },
-      diabetico:{ label: 'Apto diabét.', icon: '💚', bg: 'bg-teal-100',   text: 'text-teal-800'   },
-    };
+      <div class="todos-card fade-in">
+        <div class="todos-card-icon" style="background:#d1ecf1;">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="14" fill="#0c5460" opacity="0.15"/>
+            <path d="M10 16l4 4 8-8" stroke="#0c5460" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Aptos para diabéticos</h3>
+        <p>Formulados con edulcorantes naturales, sin azúcar agregada. Certificados y auditados por la <strong>Asociación de Diabéticos del Uruguay</strong>.</p>
+        <div class="adu-badge-inline">
+          <svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M3.5 6l2 2 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Certificado ADU
+        </div>
+      </div>
 
-    /* ─── UTILITY HOOKS ─────────────────────────────────────── */
-    function useIntersection(ref, options = {}) {
-      const [isVisible, setIsVisible] = useState(false);
-      useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-        const obs = new IntersectionObserver(([entry]) => {
-          if (entry.isIntersecting) { setIsVisible(true); obs.disconnect(); }
-        }, { threshold: 0.12, ...options });
-        obs.observe(el);
-        return () => obs.disconnect();
-      }, []);
-      return isVisible;
-    }
+      <div class="todos-card fade-in">
+        <div class="todos-card-icon" style="background:#fff3cd;">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect x="6" y="8" width="20" height="16" rx="4" fill="#856404" opacity="0.15"/>
+            <text x="16" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#856404" font-family="sans-serif">GF</text>
+          </svg>
+        </div>
+        <h3>Sin TACC / Celíacos</h3>
+        <p>Chocolate, dulce de leche y helados frutales 100% libres de gluten. Elaborados con ingredientes certificados, sin contaminación cruzada.</p>
+        <div class="adu-badge-inline" style="background:rgba(133,100,4,0.1); border-color:#856404; color:#856404;">
+          <svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M3.5 6l2 2 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Libre de gluten
+        </div>
+      </div>
 
-    /* ─── ADU BADGE SVG ─────────────────────────────────────── */
-    function AduBadge({ size = 80, className = '' }) {
-      return (
-        <svg
-          width={size} height={size} viewBox="0 0 100 100"
-          className={className}
-          aria-label="Aprobado por ADU — Asociación Diabetes Uruguay"
-          role="img"
-        >
-          <defs>
-            <linearGradient id="aduGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#5B8C6E" />
-              <stop offset="100%" stopColor="#3D5C48" />
-            </linearGradient>
-          </defs>
-          {/* Outer ring */}
-          <circle cx="50" cy="50" r="48" fill="url(#aduGrad)" />
-          <circle cx="50" cy="50" r="44" fill="none" stroke="#A8D5BA" strokeWidth="1.5" />
-          {/* Inner circle */}
-          <circle cx="50" cy="50" r="38" fill="#FFFDF7" />
-          {/* Checkmark */}
-          <path d="M34 50 L44 61 L66 38" stroke="#5B8C6E" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-          {/* ADU text */}
-          <text x="50" y="80" textAnchor="middle" fontSize="10" fontWeight="700" fill="#5B8C6E" fontFamily="Plus Jakarta Sans, sans-serif">ADU</text>
-          {/* Circular text path */}
-          <path id="aduCircle" d="M50,6 A44,44 0 0,1 94,50" fill="none" />
-          <path id="aduCircle2" d="M6,50 A44,44 0 0,1 50,6" fill="none" />
-          <text fontSize="7" fill="#A8D5BA" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight="600">
-            <textPath href="#aduCircle">APROBADO</textPath>
-          </text>
-          <text fontSize="7" fill="#A8D5BA" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight="600">
-            <textPath href="#aduCircle2" startOffset="10%">DIABETES ·</textPath>
-          </text>
-        </svg>
-      );
-    }
+      <div class="todos-card fade-in">
+        <div class="todos-card-icon" style="background:#d4edda;">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M16 6c0 0-8 5-8 13a8 8 0 0016 0c0-8-8-13-8-13z" fill="#2d6a4f" opacity="0.2" stroke="#2d6a4f" stroke-width="1.5"/>
+            <path d="M16 14c0 0-3 2-3 5a3 3 0 006 0c0-3-3-5-3-5z" fill="#2d6a4f" opacity="0.5"/>
+          </svg>
+        </div>
+        <h3>Línea vegana Vegalatto</h3>
+        <p>Helados 100% de origen vegetal, sin lácteos ni ingredientes de origen animal. La misma cremosidad, sin comprometer tus valores.</p>
+        <div class="adu-badge-inline" style="background:rgba(45,106,79,0.1); border-color:#2d6a4f; color:#2d6a4f;">
+          <svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M3.5 6l2 2 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          100% vegano
+        </div>
+      </div>
 
-    /* ─── NAVBAR ────────────────────────────────────────────── */
-    function Navbar() {
-      const [scrolled, setScrolled] = useState(false);
-      const [menuOpen, setMenuOpen] = useState(false);
+    </div>
+    <div class="todos-quote fade-in">
+      "No hay un menú especial. Hay <strong>un solo menú</strong>, para todos."
+    </div>
+  </div>
+</section>
 
-      useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 40);
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
-      }, []);
+<!-- SABORES -->
+<section id="sabores" class="section">
+  <div class="container">
+    <div class="text-center fade-in">
+      <span class="section-tag">Nuestros sabores</span>
+      <h2 class="section-title">Los clásicos de <em>siempre</em></h2>
+      <p class="section-sub">Elaborados artesanalmente desde hace más de 70 años. Todos los días frescos, todos los días distintos — pero siempre los favoritos.</p>
+    </div>
+    <div class="sabores-grid" id="sabores-grid"></div>
+  </div>
+</section>
 
-      const links = [
-        { href: '#sabores',      label: 'Sabores'     },
-        { href: '#para-todos',   label: 'Para todos'  },
-        { href: '#fidelizacion', label: 'Puntos'      },
-        { href: '#medidor',      label: 'Mi copa'     },
-        { href: '#contacto',     label: 'Contacto'    },
-      ];
+<!-- COMO FUNCIONA -->
+<section id="como-funciona" class="section">
+  <div class="container">
+    <div class="text-center fade-in">
+      <span class="section-tag">Club de puntos</span>
+      <h2 class="section-title">Cómo <em>funciona</em></h2>
+      <p class="section-sub">Cada vez que comprás, acumulás puntos. Cuando llegás a 100, te ganás un helado gratis. Así de simple.</p>
+    </div>
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-num">1</div>
+        <h3>Comprá</h3>
+        <p>Cada $100 pesos gastados en Los Trovadores te suman <strong>1 punto</strong> a tu cuenta.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">2</div>
+        <h3>Acumulá</h3>
+        <p>Tus puntos se guardan automáticamente. Podés ver tu progreso en cualquier momento con tu email.</p>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">3</div>
+        <h3>Canjeá</h3>
+        <p>Con <strong>500 puntos</strong> obtenés un helado gratis a elección, incluyendo los sabores aptos diabéticos y veganos.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      return (
-        <nav
-          role="navigation"
-          aria-label="Navegación principal"
-          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 navbar-blur
-            ${scrolled ? 'bg-crema/90 shadow-md py-3' : 'bg-transparent py-5'}`}
-        >
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-            {/* Logo */}
-            <a href="#inicio" className="flex items-center gap-2 group" aria-label="Heladería Los Trovadores — inicio">
-              <span className="text-2xl" aria-hidden="true">🍦</span>
-              <span className={`font-display font-bold text-xl transition-colors duration-300
-                ${scrolled ? 'text-chocolate' : 'text-white'}`}>
-                Los Trovadores
-              </span>
-            </a>
-
-            {/* Desktop links */}
-            <div className="hidden md:flex items-center gap-7">
-              {links.map(l => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  className={`font-body font-500 text-sm transition-colors duration-200
-                    ${scrolled ? 'text-chocolate hover:text-menta' : 'text-white/90 hover:text-white'}`}
-                >
-                  {l.label}
-                </a>
-              ))}
-              <a
-                href="#suscripcion"
-                className="ml-2 px-4 py-2 rounded-full bg-pistacho text-chocolate font-body font-600 text-sm
-                  hover:bg-menta hover:text-white transition-all duration-200 shadow-sm"
-              >
-                Únete al club
-              </a>
-            </div>
-
-            {/* Mobile burger */}
-            <button
-              onClick={() => setMenuOpen(o => !o)}
-              className={`md:hidden p-2 rounded-lg transition-colors duration-200
-                ${scrolled ? 'text-chocolate' : 'text-white'}`}
-              aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
-              aria-expanded={menuOpen}
-            >
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                {menuOpen
-                  ? <><line x1="4" y1="4" x2="18" y2="18"/><line x1="18" y1="4" x2="4" y2="18"/></>
-                  : <><line x1="3" y1="6" x2="19" y2="6"/><line x1="3" y1="11" x2="19" y2="11"/><line x1="3" y1="16" x2="19" y2="16"/></>
-                }
-              </svg>
-            </button>
+<!-- MEDIDOR DE HELADO -->
+<section id="medidor" class="section">
+  <div class="container">
+    <div class="medidor-inner">
+      <div class="medidor-text fade-in">
+        <span class="section-tag">Tu progreso</span>
+        <h2 class="section-title" style="color:#fff;">El medidor de <em>helado</em></h2>
+        <p class="section-sub">Mirá cuánto te falta para tu próximo helado gratis. Cada compra llena un poco más el cono.</p>
+        <br/>
+        <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:1rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div style="width:16px;height:16px;border-radius:50%;background:#c8a97e;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;"></div>
+            <span style="color:rgba(255,255,255,0.7);font-size:0.85rem;">Dulce de leche</span>
           </div>
-
-          {/* Mobile menu */}
-          {menuOpen && (
-            <div className="md:hidden bg-crema shadow-lg px-4 pt-2 pb-5 flex flex-col gap-3 border-t border-pistacho/30">
-              {links.map(l => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="font-body text-chocolate py-2 border-b border-pistacho/20 text-base"
-                >
-                  {l.label}
-                </a>
-              ))}
-              <a
-                href="#suscripcion"
-                onClick={() => setMenuOpen(false)}
-                className="mt-2 px-5 py-2.5 rounded-full bg-menta text-white font-body font-600 text-center"
-              >
-                Únete al club
-              </a>
-            </div>
-          )}
-        </nav>
-      );
-    }
-
-    /* ─── HERO ──────────────────────────────────────────────── */
-    function Hero() {
-      return (
-        <section
-          id="inicio"
-          className="hero-bg relative min-h-screen flex flex-col items-center justify-center text-center px-4 py-32 overflow-hidden"
-          aria-label="Sección principal"
-        >
-          {/* Decorative circles */}
-          <div aria-hidden="true" className="absolute top-0 left-0 w-96 h-96 rounded-full bg-white/5 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-          <div aria-hidden="true" className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-black/10 translate-x-1/3 translate-y-1/3 pointer-events-none" />
-          <div aria-hidden="true" className="absolute top-1/2 left-1/2 w-[800px] h-[800px] rounded-full border border-white/5 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-
-          <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-6">
-            {/* 70 years pill */}
-            <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 text-white/90 text-sm font-body font-500 px-4 py-1.5 rounded-full">
-              <span aria-hidden="true">✦</span>
-              Más de 70 años en Pocitos
-              <span aria-hidden="true">✦</span>
-            </div>
-
-            {/* Main heading */}
-            <h1 className="font-display font-700 text-5xl sm:text-6xl md:text-7xl text-white leading-[1.05] tracking-tight">
-              La esquina más<br />
-              <em className="not-italic text-pistacho">helada</em> del país
-            </h1>
-
-            <p className="font-body text-white/80 text-lg sm:text-xl max-w-xl leading-relaxed">
-              Desde el corazón de Pocitos, hacemos helados artesanales para todos. Aptos diabéticos, sin TACC y veganos — al mismo precio que los demás.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
-              <a
-                href="#sabores"
-                className="px-8 py-3.5 rounded-full bg-white text-chocolate font-body font-600 text-base shadow-lg
-                  hover:bg-pistacho hover:text-chocolate transition-all duration-200"
-              >
-                Ver sabores
-              </a>
-              <a
-                href="#suscripcion"
-                className="px-8 py-3.5 rounded-full bg-transparent border-2 border-white/60 text-white font-body font-500 text-base
-                  hover:bg-white/10 transition-all duration-200"
-              >
-                Únete al club de puntos
-              </a>
-            </div>
-
-            {/* ADU Badge */}
-            <div className="mt-6 flex flex-col items-center gap-2">
-              <AduBadge size={72} />
-              <p className="text-white/70 text-xs font-body">
-                Certificados por la Asociación Diabetes Uruguay
-              </p>
-            </div>
-
-            {/* Rating */}
-            <div className="mt-2 inline-flex items-center gap-2 bg-white/10 border border-white/15 px-4 py-2 rounded-full">
-              <div className="flex gap-0.5" aria-label={`${BRAND.rating} estrellas`}>
-                {[1,2,3,4,5].map(i => (
-                  <svg key={i} width="14" height="14" viewBox="0 0 14 14" fill={i <= 4 ? '#FCD34D' : 'none'} aria-hidden="true">
-                    <path d="M7 1l1.545 3.13L12 4.635l-2.5 2.437.59 3.44L7 8.885l-3.09 1.627.59-3.44L2 4.635l3.455-.505z"
-                      stroke="#FCD34D" strokeWidth="0.5"/>
-                  </svg>
-                ))}
-              </div>
-              <span className="text-white font-body font-600 text-sm">{BRAND.rating}</span>
-              <span className="text-white/60 text-xs font-body">·  {BRAND.reviewCount} opiniones en Google</span>
-            </div>
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div style="width:16px;height:16px;border-radius:50%;background:#f8b878;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;"></div>
+            <span style="color:rgba(255,255,255,0.7);font-size:0.85rem;">Sambayón</span>
           </div>
-
-          {/* Scroll indicator */}
-          <div
-            aria-hidden="true"
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-50"
-          >
-            <span className="text-white text-xs font-body">Explorá</span>
-            <svg width="16" height="20" viewBox="0 0 16 20" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round">
-              <path d="M8 3 L8 17 M3 12 L8 17 L13 12" />
-            </svg>
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div style="width:16px;height:16px;border-radius:50%;background:#6b3a2a;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;"></div>
+            <span style="color:rgba(255,255,255,0.7);font-size:0.85rem;">Chocolate</span>
           </div>
-        </section>
-      );
-    }
-
-    /* ─── HELADERÍA PARA TODOS ──────────────────────────────── */
-    function HeladeriaParaTodos() {
-      const ref = useRef(null);
-      const visible = useIntersection(ref);
-
-      const cards = [
-        {
-          icon: <AduBadge size={56} />,
-          title: 'Aptos para diabéticos',
-          desc: 'Certificados por la Asociación Diabetes Uruguay (ADU). Elaborados sin azúcar agregada, con el mismo sabor y cremosidad de siempre.',
-          badge: { label: '💚 Cert. ADU', bg: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-800' },
-        },
-        {
-          icon: (
-            <div className="w-14 h-14 rounded-full bg-amber-100 flex items-center justify-center text-2xl" aria-hidden="true">
-              🌾
-            </div>
-          ),
-          title: 'Sin TACC / Celíacos',
-          desc: 'Chocolate, dulce de leche y todos los frutales son libres de gluten. Producción con protocolos de trazabilidad para celíacos.',
-          badge: { label: '🌾 Sin TACC', bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-800' },
-        },
-        {
-          icon: (
-            <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center text-2xl" aria-hidden="true">
-              🌿
-            </div>
-          ),
-          title: 'Línea Vegalatto',
-          desc: 'Nuestra línea vegana 100% de origen vegetal. Misma textura sedosa, sin leche animal. Frutales, maracuyá y más.',
-          badge: { label: '🌿 Vegano', bg: 'bg-green-50', border: 'border-green-200', text: 'text-green-800' },
-        },
-      ];
-
-      return (
-        <section
-          id="para-todos"
-          ref={ref}
-          className={`py-20 sm:py-28 px-4 bg-white section-reveal ${visible ? 'visible' : ''}`}
-          aria-labelledby="para-todos-title"
-        >
-          <div className="max-w-6xl mx-auto">
-            {/* Header */}
-            <div className="text-center mb-14">
-              <span className="inline-block text-menta font-body font-600 text-sm tracking-widest uppercase mb-3">
-                Inclusión desde 1950
-              </span>
-              <h2 id="para-todos-title" className="font-display font-700 text-4xl sm:text-5xl text-chocolate mb-5">
-                Heladería para <em className="italic text-menta">todos</em>
-              </h2>
-              <p className="font-body text-chocolate-light text-lg max-w-2xl mx-auto leading-relaxed">
-                No hay helados especiales — hay helados para todos.
-                <br className="hidden sm:block" />
-                <strong className="text-chocolate"> Al mismo precio que los helados comunes.</strong>
-              </p>
-            </div>
-
-            {/* Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {cards.map((card, i) => (
-                <article
-                  key={i}
-                  className="bg-crema rounded-2xl p-7 flex flex-col gap-4 border border-pistacho/30
-                    hover:border-menta/50 hover:shadow-lg transition-all duration-300"
-                >
-                  <div className="flex items-start gap-4">
-                    {card.icon}
-                    <div className="flex-1">
-                      <h3 className="font-display font-600 text-xl text-chocolate mb-1">{card.title}</h3>
-                      <span className={`inline-block text-xs font-body font-600 px-3 py-1 rounded-full border ${card.badge.bg} ${card.badge.border} ${card.badge.text}`}>
-                        {card.badge.label}
-                      </span>
-                    </div>
-                  </div>
-                  <p className="font-body text-chocolate-light leading-relaxed text-sm">{card.desc}</p>
-                </article>
-              ))}
-            </div>
-
-            {/* Bottom message */}
-            <div className="mt-12 text-center p-8 rounded-2xl bg-gradient-to-r from-pistacho/30 to-menta/20 border border-pistacho/40">
-              <p className="font-display font-600 text-2xl text-chocolate italic">
-                "Porque creemos que todos merecen disfrutar un buen helado."
-              </p>
-              <p className="font-body text-chocolate-light mt-2 text-sm">— La familia Trovadores, desde 1952</p>
-            </div>
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div style="width:16px;height:16px;border-radius:50%;background:#e8a0b8;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;"></div>
+            <span style="color:rgba(255,255,255,0.7);font-size:0.85rem;">Frutilla</span>
           </div>
-        </section>
-      );
-    }
-
-    /* ─── SABORES ───────────────────────────────────────────── */
-    function Sabores() {
-      const ref = useRef(null);
-      const visible = useIntersection(ref);
-
-      return (
-        <section
-          id="sabores"
-          ref={ref}
-          className={`py-20 sm:py-28 px-4 bg-crema section-reveal ${visible ? 'visible' : ''}`}
-          aria-labelledby="sabores-title"
-        >
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-14">
-              <span className="inline-block text-menta font-body font-600 text-sm tracking-widest uppercase mb-3">
-                Catálogo de sabores
-              </span>
-              <h2 id="sabores-title" className="font-display font-700 text-4xl sm:text-5xl text-chocolate mb-4">
-                Nuestros helados
-              </h2>
-              <p className="font-body text-chocolate-light text-lg max-w-xl mx-auto">
-                Elaborados artesanalmente todos los días. Siempre frescos, siempre con amor.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {FLAVORS.map(flavor => (
-                <FlavorCard key={flavor.id} flavor={flavor} />
-              ))}
-            </div>
-
-            {/* Tag legend */}
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-              {Object.entries(TAG_CONFIG).map(([key, cfg]) => (
-                <span
-                  key={key}
-                  className={`inline-flex items-center gap-1.5 text-xs font-body font-600 px-3 py-1.5 rounded-full ${cfg.bg} ${cfg.text}`}
-                >
-                  <span aria-hidden="true">{cfg.icon}</span>
-                  {cfg.label}
-                </span>
-              ))}
-            </div>
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div style="width:16px;height:16px;border-radius:50%;background:#A8D5BA;border:2px solid rgba(255,255,255,0.3);flex-shrink:0;"></div>
+            <span style="color:rgba(255,255,255,0.7);font-size:0.85rem;">Pistacho / Limón</span>
           </div>
-        </section>
-      );
-    }
+        </div>
+      </div>
 
-    function FlavorCard({ flavor }) {
-      return (
-        <article
-          className={`flavor-card rounded-2xl overflow-hidden bg-white border border-gray-100 shadow-sm cursor-default
-            ${flavor.featured ? 'md:col-span-2 lg:col-span-2' : ''}`}
-          aria-label={`Helado de ${flavor.name}`}
-        >
-          {/* Color swatch */}
-          <div
-            className="h-32 w-full relative"
-            style={{ background: flavor.gradient }}
-            aria-hidden="true"
-          >
-            {flavor.popular && (
-              <span className="absolute top-3 left-3 bg-white/90 text-chocolate text-xs font-body font-700 px-2.5 py-1 rounded-full">
-                ✦ Popular
-              </span>
-            )}
-            {flavor.featured && (
-              <span className="absolute top-3 left-3 bg-white/90 text-menta text-xs font-body font-700 px-2.5 py-1 rounded-full">
-                ★ Especialidad
-              </span>
-            )}
-            {/* Decorative scoop shape */}
-            <div
-              aria-hidden="true"
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-16 h-16 rounded-full border-4 border-white shadow-md"
-              style={{ background: flavor.gradient }}
-            />
+      <div class="medidor-demo-box fade-in">
+        <div class="demo-user">
+          <div class="demo-avatar">MG</div>
+          <div>
+            <div class="demo-user-name">María García</div>
+            <div class="demo-user-pts" id="pts-label">340 puntos acumulados</div>
           </div>
+        </div>
 
-          <div className="pt-10 pb-5 px-5">
-            <h3 className="font-display font-600 text-lg text-chocolate mb-1 leading-tight">{flavor.name}</h3>
-            <p className="font-body text-chocolate-light text-sm leading-relaxed mb-3">{flavor.desc}</p>
-            {/* Tag pills */}
-            {flavor.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1.5" aria-label="Características dietéticas">
-                {flavor.tags.map(tag => {
-                  const cfg = TAG_CONFIG[tag];
-                  return (
-                    <span
-                      key={tag}
-                      className={`inline-flex items-center gap-1 text-xs font-body font-600 px-2.5 py-1 rounded-full ${cfg.bg} ${cfg.text}`}
-                      aria-label={cfg.label}
-                    >
-                      <span aria-hidden="true">{cfg.icon}</span>
-                      {cfg.label}
-                    </span>
-                  );
-                })}
-              </div>
-            )}
+        <div class="pts-display" id="pts-display">
+          340
+          <span>puntos</span>
+        </div>
+
+        <!-- Cone SVG -->
+        <div class="cone-wrap">
+          <svg id="cone-svg" viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+            <!-- Cone body -->
+            <polygon points="100,250 50,130 150,130" fill="#c8954a"/>
+            <!-- Waffle lines horizontal -->
+            <line x1="55" y1="145" x2="145" y2="145" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+            <line x1="58" y1="160" x2="142" y2="160" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+            <line x1="64" y1="175" x2="136" y2="175" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+            <line x1="72" y1="190" x2="128" y2="190" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+            <line x1="82" y1="205" x2="118" y2="205" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+            <!-- Waffle lines diagonal -->
+            <line x1="50" y1="130" x2="100" y2="250" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <line x1="72" y1="130" x2="106" y2="250" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <line x1="95" y1="130" x2="100" y2="250" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <line x1="117" y1="130" x2="100" y2="250" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <line x1="139" y1="130" x2="100" y2="250" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <!-- Cone shadow -->
+            <polygon points="100,250 50,130 80,130" fill="rgba(0,0,0,0.1)"/>
+
+            <!-- Scoop slots (ghost) -->
+            <circle cx="100" cy="118" r="26" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <circle cx="100" cy="86" r="24" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <circle cx="100" cy="57" r="22" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <circle cx="100" cy="31" r="20" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <circle cx="100" cy="9" r="18" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+            <!-- Scoops rendered by JS -->
+            <g id="scoops-group"></g>
+          </svg>
+        </div>
+
+        <div class="slider-wrap">
+          <span class="slider-label">Simulá tus puntos</span>
+          <input type="range" id="pts-slider" min="0" max="500" value="340" aria-label="Simulador de puntos"/>
+          <div class="slider-info"><span>0 pts</span><span>500 pts = 🍦 gratis</span></div>
+        </div>
+
+        <div class="reward-msg close" id="reward-msg">
+          ¡Te faltan <span id="pts-remaining">160</span> puntos para tu helado gratis!
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUSCRIPCION -->
+<section id="suscripcion" class="section">
+  <div class="container">
+    <div class="text-center fade-in" style="margin-bottom:3rem;">
+      <span class="section-tag">Promociones exclusivas</span>
+      <h2 class="section-title">Enterate primero de <em>las promos</em></h2>
+      <p class="section-sub">Suscribite y recibí ofertas especiales, nuevos sabores y descuentos antes que nadie.</p>
+    </div>
+    <div class="suscripcion-wrap">
+
+      <div>
+        <div class="form-box" id="form-box">
+          <form id="promo-form" novalidate>
+            <div class="form-group">
+              <label for="sub-nombre">Nombre</label>
+              <input type="text" id="sub-nombre" name="nombre" placeholder="Tu nombre" required autocomplete="given-name"/>
+            </div>
+            <div class="form-group">
+              <label for="sub-email">Email</label>
+              <input type="email" id="sub-email" name="email" placeholder="tu@email.com" required autocomplete="email"/>
+            </div>
+            <button type="submit" class="btn-submit" id="submit-btn">Suscribirme a las promos</button>
+            <p class="form-note">Sin spam. Solo las mejores promos de heladería. Podés darte de baja cuando quieras.</p>
+          </form>
+        </div>
+        <div class="success-box" id="success-box">
+          <div class="success-inner">
+            <div class="success-icon">🎉</div>
+            <h3>¡Listo, <span id="success-name"></span>!</h3>
+            <p>Te anotamos en la lista. Vas a recibir las mejores promos de Los Trovadores directo en tu casilla.</p>
           </div>
-        </article>
-      );
-    }
+        </div>
+        <!-- INTEGRATION POINT: replace with Resend/Mailchimp/SendGrid API call to actually send emails and store subscriber -->
+      </div>
 
-    /* ─── CÓMO FUNCIONA ─────────────────────────────────────── */
-    function ComoFunciona() {
-      const ref = useRef(null);
-      const visible = useIntersection(ref);
-
-      const steps = [
-        {
-          num: '01',
-          icon: (
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-              <path d="M4 8h24M4 8l2 16h20L28 8M12 8V6a4 4 0 018 0v2" stroke="#5B8C6E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          ),
-          title: 'Comprá tu helado',
-          desc: 'Visitanos en Gabriel Pereira 3202 o pedí por WhatsApp. Cada compra suma puntos automáticamente.',
-        },
-        {
-          num: '02',
-          icon: (
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-              <circle cx="16" cy="16" r="12" stroke="#5B8C6E" strokeWidth="2"/>
-              <path d="M16 10v6l4 3" stroke="#5B8C6E" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          ),
-          title: 'Acumulá puntos',
-          desc: '1 punto por cada $50 de compra. Tus puntos se guardan y no vencen mientras seas cliente activo.',
-        },
-        {
-          num: '03',
-          icon: (
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-              <path d="M8 16s1.5-6 8-6 8 6 8 6" stroke="#5B8C6E" strokeWidth="2" strokeLinecap="round"/>
-              <circle cx="16" cy="20" r="5" stroke="#5B8C6E" strokeWidth="2"/>
-              <path d="M16 15v-3M13 12.5l1.5 2M19 12.5l-1.5 2" stroke="#5B8C6E" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-          ),
-          title: 'Canjeá helados gratis',
-          desc: 'Con 500 puntos llevás un kilo gratis. Sin letra chica, sin vencimiento, sin complicaciones.',
-        },
-      ];
-
-      return (
-        <section
-          id="fidelizacion"
-          ref={ref}
-          className={`py-20 sm:py-28 px-4 bg-white section-reveal ${visible ? 'visible' : ''}`}
-          aria-labelledby="fidelizacion-title"
-        >
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-14">
-              <span className="inline-block text-menta font-body font-600 text-sm tracking-widest uppercase mb-3">
-                Programa de fidelización
-              </span>
-              <h2 id="fidelizacion-title" className="font-display font-700 text-4xl sm:text-5xl text-chocolate mb-4">
-                Cómo funciona
-              </h2>
-              <p className="font-body text-chocolate-light text-lg max-w-xl mx-auto">
-                Simple, transparente y delicioso.
-              </p>
-            </div>
-
-            {/* Steps */}
-            <div className="relative flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-0">
-              {steps.map((step, i) => (
-                <React.Fragment key={i}>
-                  <div className="flex-1 flex flex-col items-center text-center px-4">
-                    <div className="w-16 h-16 rounded-2xl bg-pistacho/30 border border-pistacho flex items-center justify-center mb-4">
-                      {step.icon}
-                    </div>
-                    <div className="font-display font-900 text-4xl text-pistacho/60 mb-1">{step.num}</div>
-                    <h3 className="font-display font-600 text-xl text-chocolate mb-2">{step.title}</h3>
-                    <p className="font-body text-chocolate-light text-sm leading-relaxed max-w-xs">{step.desc}</p>
-                  </div>
-                  {i < steps.length - 1 && (
-                    <div
-                      aria-hidden="true"
-                      className="hidden md:block w-12 h-1.5 rounded-full step-connector flex-shrink-0"
-                    />
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
-
-            {/* CTA */}
-            <div className="mt-14 text-center">
-              <a
-                href="#suscripcion"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-menta text-white font-body font-600 text-base
-                  hover:bg-chocolate transition-all duration-200 shadow-md hover:shadow-lg"
-              >
-                Empezá a acumular hoy
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-                  <path d="M4 9h10M10 5l4 4-4 4"/>
-                </svg>
-              </a>
-            </div>
+      <div class="fade-in">
+        <p class="email-preview-label">Vista previa — así se ven nuestros mails</p>
+        <div class="email-mock">
+          <div class="email-header">
+            <div class="email-from">De: Los Trovadores &lt;info@lostrovadores.com.uy&gt;</div>
+            <div class="email-subject">🍦 Promo del mes: 2×1 en sambayón</div>
           </div>
-        </section>
-      );
-    }
-
-    /* ─── MEDIDOR DE HELADO ─────────────────────────────────── */
-    function MedidorHelado() {
-      const ref = useRef(null);
-      const visible = useIntersection(ref);
-      const MAX_POINTS = 500;
-      const DEMO_USER = { name: 'María García', points: 340 };
-      const [simulatedPoints, setSimulatedPoints] = useState(DEMO_USER.points);
-      const [prevPoints, setPrevPoints] = useState(DEMO_USER.points);
-      const [animKey, setAnimKey] = useState(0);
-
-      const pct = Math.min(simulatedPoints / MAX_POINTS, 1);
-      const scoops = Math.floor(pct * 5); // 0–5 scoops
-
-      const handleSlider = (e) => {
-        const val = Number(e.target.value);
-        setPrevPoints(simulatedPoints);
-        setSimulatedPoints(val);
-        if (Math.floor(val / MAX_POINTS * 5) !== Math.floor(simulatedPoints / MAX_POINTS * 5)) {
-          setAnimKey(k => k + 1);
-        }
-      };
-
-      // Update slider CSS var
-      useEffect(() => {
-        const slider = document.getElementById('points-slider');
-        if (slider) {
-          slider.style.setProperty('--val', `${(simulatedPoints / MAX_POINTS) * 100}%`);
-        }
-      }, [simulatedPoints]);
-
-      const scoopColors = [
-        { fill: '#C89460', stroke: '#A0703A', label: 'Dulce de leche' },
-        { fill: '#F48FB1', stroke: '#E91E63', label: 'Frutilla'       },
-        { fill: '#5C3A1E', stroke: '#3D2B1F', label: 'Chocolate'      },
-        { fill: '#F5D78E', stroke: '#E0B84A', label: 'Sambayón'       },
-        { fill: '#A8D5BA', stroke: '#5B8C6E', label: 'Menta'          },
-      ];
-
-      return (
-        <section
-          id="medidor"
-          ref={ref}
-          className={`py-20 sm:py-28 px-4 bg-crema section-reveal ${visible ? 'visible' : ''}`}
-          aria-labelledby="medidor-title"
-        >
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-14">
-              <span className="inline-block text-menta font-body font-600 text-sm tracking-widest uppercase mb-3">
-                Tu copa de puntos
-              </span>
-              <h2 id="medidor-title" className="font-display font-700 text-4xl sm:text-5xl text-chocolate mb-4">
-                El medidor de <em className="italic text-menta">Los Trovadores</em>
-              </h2>
-              <p className="font-body text-chocolate-light text-lg max-w-xl mx-auto">
-                Cada compra llena tu copa. Cuando llega a 500 puntos, ¡helado gratis!
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              {/* Left: User card + slider */}
-              <div className="flex flex-col gap-6">
-                {/* User card */}
-                <div className="bg-white rounded-2xl p-6 border border-pistacho/30 shadow-sm">
-                  <div className="flex items-center gap-4 mb-5">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pistacho to-menta flex items-center justify-center text-white font-display font-700 text-lg">
-                      {DEMO_USER.name[0]}
-                    </div>
-                    <div>
-                      <p className="font-body font-600 text-chocolate">{DEMO_USER.name}</p>
-                      <p className="font-body text-chocolate-light text-sm">Socia desde 2022</p>
-                    </div>
-                  </div>
-
-                  {/* Points display */}
-                  <div className="flex items-baseline justify-between mb-3">
-                    <span className="font-display font-700 text-4xl text-menta">{simulatedPoints}</span>
-                    <span className="font-body text-chocolate-light text-sm">/ {MAX_POINTS} puntos</span>
-                  </div>
-
-                  {/* Progress bar */}
-                  <div className="relative h-3 rounded-full bg-pistacho/20 overflow-hidden mb-1" role="progressbar" aria-valuenow={simulatedPoints} aria-valuemin={0} aria-valuemax={MAX_POINTS} aria-label="Progreso de puntos">
-                    <div
-                      className="absolute inset-y-0 left-0 rounded-full transition-all duration-500 ease-out"
-                      style={{
-                        width: `${pct * 100}%`,
-                        background: 'linear-gradient(90deg, #A8D5BA, #5B8C6E)',
-                      }}
-                    />
-                  </div>
-                  <div className="flex justify-between text-xs font-body text-chocolate-light mt-1">
-                    <span>0</span>
-                    <span className="text-menta font-600">{MAX_POINTS - simulatedPoints > 0 ? `Faltan ${MAX_POINTS - simulatedPoints} pts` : '¡Canjeá ahora!'}</span>
-                    <span>{MAX_POINTS}</span>
-                  </div>
-                </div>
-
-                {/* Simulator */}
-                <div className="bg-white rounded-2xl p-6 border border-pistacho/30 shadow-sm">
-                  <p className="font-body font-600 text-chocolate mb-4 flex items-center gap-2">
-                    <span aria-hidden="true">🎛️</span>
-                    Simulá tus puntos
-                  </p>
-                  <input
-                    id="points-slider"
-                    type="range"
-                    min={0}
-                    max={MAX_POINTS}
-                    value={simulatedPoints}
-                    onChange={handleSlider}
-                    className="w-full mb-3"
-                    aria-label="Simular cantidad de puntos"
-                  />
-                  <div className="flex justify-between text-xs font-body text-chocolate-light">
-                    <span>0 pts</span>
-                    <span>250 pts</span>
-                    <span>500 pts 🎉</span>
-                  </div>
-
-                  {simulatedPoints >= MAX_POINTS && (
-                    <div className="mt-4 p-3 rounded-xl bg-menta/10 border border-menta/30 text-center">
-                      <p className="font-body font-600 text-menta text-sm">
-                        🎉 ¡Felicidades! Podés canjear 1 kg de helado gratis
-                      </p>
-                    </div>
-                  )}
-                  {simulatedPoints > 0 && simulatedPoints < MAX_POINTS && (
-                    <div className="mt-4 p-3 rounded-xl bg-pistacho/15 border border-pistacho/30">
-                      <p className="font-body text-chocolate-light text-xs text-center">
-                        Con {MAX_POINTS - simulatedPoints} puntos más, ¡helado gratis! Equivalen a aprox.
-                        <strong className="text-chocolate"> ${(MAX_POINTS - simulatedPoints) * 50}</strong> en compras.
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Right: Ice cream cone SVG */}
-              <div className="flex flex-col items-center gap-4" aria-hidden="true">
-                <div className="cone-container relative select-none">
-                  <svg
-                    width="220" height="360"
-                    viewBox="0 0 220 360"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    {/* ── CONE ── */}
-                    <defs>
-                      <linearGradient id="coneGrad" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="#F5C87A"/>
-                        <stop offset="100%" stopColor="#D4924A"/>
-                      </linearGradient>
-                      <linearGradient id="coneShadow" x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0%" stopColor="#C07820" stopOpacity="0.3"/>
-                        <stop offset="100%" stopColor="transparent"/>
-                      </linearGradient>
-                      {/* Clip for each scoop circle */}
-                      {scoopColors.map((_, i) => (
-                        <clipPath key={i} id={`clip-scoop-${i}`}>
-                          <circle cx="110" cy={220 - i * 52} r="46"/>
-                        </clipPath>
-                      ))}
-                    </defs>
-
-                    {/* Cone body */}
-                    <path d="M65 235 L110 355 L155 235 Z" fill="url(#coneGrad)" />
-                    {/* Cone lines (waffle pattern) */}
-                    <g stroke="#C07820" strokeWidth="1" strokeOpacity="0.4">
-                      <line x1="88" y1="240" x2="110" y2="355"/>
-                      <line x1="110" y1="240" x2="110" y2="355"/>
-                      <line x1="132" y1="240" x2="110" y2="355"/>
-                      <line x1="70" y1="258" x2="148" y2="258"/>
-                      <line x1="74" y1="278" x2="146" y2="278"/>
-                      <line x1="80" y1="298" x2="140" y2="298"/>
-                      <line x1="88" y1="318" x2="132" y2="318"/>
-                    </g>
-                    {/* Cone rim */}
-                    <ellipse cx="110" cy="237" rx="46" ry="9" fill="#E8A845" />
-                    <ellipse cx="110" cy="235" rx="46" ry="9" fill="#F5C87A" />
-
-                    {/* ── SCOOPS (rendered bottom to top) ── */}
-                    {scoopColors.map((sc, i) => {
-                      if (i >= scoops) return null;
-                      const cy = 220 - i * 52;
-                      const isTop = i === scoops - 1;
-                      return (
-                        <g
-                          key={`${animKey}-${i}`}
-                          className={isTop ? 'scoop-animate' : ''}
-                          style={isTop ? { transformOrigin: `110px ${cy}px` } : {}}
-                        >
-                          {/* Shadow */}
-                          <ellipse cx="110" cy={cy + 6} rx="43" ry="8" fill={sc.stroke} fillOpacity="0.2"/>
-                          {/* Main scoop */}
-                          <circle cx="110" cy={cy} r="46" fill={sc.fill} />
-                          {/* Highlight */}
-                          <circle cx="97" cy={cy - 14} r="12" fill="white" fillOpacity="0.2"/>
-                          <circle cx="92" cy={cy - 18} r="5" fill="white" fillOpacity="0.3"/>
-                          {/* Stroke */}
-                          <circle cx="110" cy={cy} r="46" fill="none" stroke={sc.stroke} strokeWidth="1.5"/>
-                        </g>
-                      );
-                    })}
-
-                    {/* Empty scoops (ghost) */}
-                    {scoopColors.map((sc, i) => {
-                      if (i < scoops) return null;
-                      const cy = 220 - i * 52;
-                      return (
-                        <g key={`empty-${i}`} opacity="0.12">
-                          <circle cx="110" cy={cy} r="46" fill="#A8D5BA" stroke="#5B8C6E" strokeWidth="1" strokeDasharray="4 3"/>
-                        </g>
-                      );
-                    })}
-
-                    {/* Drip on top scoop (if scoops > 0) */}
-                    {scoops > 0 && (() => {
-                      const topIdx = scoops - 1;
-                      const sc = scoopColors[topIdx];
-                      const topCy = 220 - topIdx * 52;
-                      return (
-                        <g>
-                          <path
-                            d={`M102 ${topCy + 38} Q100 ${topCy + 52} 103 ${topCy + 60} Q106 ${topCy + 68} 104 ${topCy + 80}`}
-                            stroke={sc.fill}
-                            strokeWidth="7"
-                            strokeLinecap="round"
-                            fill="none"
-                            opacity="0.7"
-                          />
-                        </g>
-                      );
-                    })()}
-                  </svg>
-                </div>
-
-                {/* Scoop count legend */}
-                <div className="flex flex-wrap justify-center gap-2 max-w-xs">
-                  {scoopColors.map((sc, i) => (
-                    <span
-                      key={i}
-                      className={`inline-flex items-center gap-1.5 text-xs font-body px-2.5 py-1 rounded-full transition-all duration-300
-                        ${i < scoops ? 'font-600 text-chocolate shadow-sm' : 'text-chocolate-light opacity-40'}`}
-                      style={i < scoops ? { background: sc.fill + '33', border: `1px solid ${sc.fill}88` } : { background: '#f0f0f0' }}
-                    >
-                      <span
-                        className="w-2.5 h-2.5 rounded-full inline-block"
-                        style={{ background: sc.fill, border: `1px solid ${sc.stroke}` }}
-                      />
-                      {sc.label}
-                    </span>
-                  ))}
-                </div>
-
-                <p className="font-body text-chocolate-light text-sm text-center max-w-xs">
-                  {scoops === 0 && 'Empezá a comprar para llenar tu copa'}
-                  {scoops === 1 && '¡Primera bola! Seguí comprando'}
-                  {scoops === 2 && 'Vas muy bien — ¡dos bolas!'}
-                  {scoops === 3 && '¡A más de la mitad! Falta poco'}
-                  {scoops === 4 && '¡Casi llegas! Una compra más'}
-                  {scoops === 5 && '🎉 ¡Copa llena! Canjeá tu helado gratis'}
-                </p>
-              </div>
-            </div>
+          <div class="email-body">
+            <p>¡Hola! Este mes tenemos una promo especial que no podés perderte:</p>
+            <p><strong>Pedís un sambayón y te llevás dos.</strong> Sin vueltas, sin códigos, solo mostrá este mail en caja.</p>
+            <p>Válido todos los días de 11:00 a 00:00. Hasta agotar stock.</p>
+            <p style="font-size:0.8rem;opacity:0.7;">📍 Gabriel Pereira 3202 esq. Berro, Pocitos, Montevideo</p>
+            <a href="#" class="email-cta" onclick="return false">Ver todos los sabores del mes</a>
           </div>
-        </section>
-      );
-    }
-
-    /* ─── SUSCRIPCIÓN ───────────────────────────────────────── */
-    function Suscripcion() {
-      const ref = useRef(null);
-      const visible = useIntersection(ref);
-      const [form, setForm] = useState({ nombre: '', email: '' });
-      const [submitted, setSubmitted] = useState(false);
-      const [loading, setLoading] = useState(false);
-
-      const handleChange = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
-
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        setLoading(true);
-        // <!-- INTEGRATION POINT: replace with Supabase/Firebase -->
-        // Example: await supabase.from('subscribers').insert([{ nombre: form.nombre, email: form.email }])
-        // <!-- INTEGRATION POINT: replace with Resend/Mailchimp -->
-        // Example: await fetch('/api/subscribe', { method: 'POST', body: JSON.stringify(form) })
-        setTimeout(() => {
-          setLoading(false);
-          setSubmitted(true);
-        }, 900);
-      };
-
-      const mockEmail = {
-        subject: '🍦 Promo del mes: 2x1 en sambayón',
-        from: 'Los Trovadores <info@lostrovadores.com.uy>',
-        to: form.email || 'tu@email.com',
-        date: new Date().toLocaleDateString('es-UY', { weekday: 'long', day: 'numeric', month: 'long' }),
-      };
-
-      return (
-        <section
-          id="suscripcion"
-          ref={ref}
-          className={`py-20 sm:py-28 px-4 bg-white section-reveal ${visible ? 'visible' : ''}`}
-          aria-labelledby="suscripcion-title"
-        >
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-14">
-              <span className="inline-block text-menta font-body font-600 text-sm tracking-widest uppercase mb-3">
-                Club Los Trovadores
-              </span>
-              <h2 id="suscripcion-title" className="font-display font-700 text-4xl sm:text-5xl text-chocolate mb-4">
-                Recibí las mejores promos
-              </h2>
-              <p className="font-body text-chocolate-light text-lg max-w-xl mx-auto">
-                Suscribite y sé el primero en enterarte de los 2x1, sabores nuevos y eventos especiales.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-              {/* Form or Success */}
-              <div>
-                {!submitted ? (
-                  <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
-                    <div>
-                      <label htmlFor="suscripcion-nombre" className="block font-body font-500 text-sm text-chocolate mb-1.5">
-                        Tu nombre
-                      </label>
-                      <input
-                        id="suscripcion-nombre"
-                        type="text"
-                        name="nombre"
-                        value={form.nombre}
-                        onChange={handleChange}
-                        placeholder="María García"
-                        required
-                        className="w-full px-4 py-3 rounded-xl border border-pistacho/40 bg-crema font-body text-chocolate text-sm
-                          placeholder:text-chocolate-light/50 focus:outline-none focus:border-menta focus:ring-2 focus:ring-menta/20 transition-all duration-200"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="suscripcion-email" className="block font-body font-500 text-sm text-chocolate mb-1.5">
-                        Tu email
-                      </label>
-                      <input
-                        id="suscripcion-email"
-                        type="email"
-                        name="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        placeholder="maria@email.com"
-                        required
-                        className="w-full px-4 py-3 rounded-xl border border-pistacho/40 bg-crema font-body text-chocolate text-sm
-                          placeholder:text-chocolate-light/50 focus:outline-none focus:border-menta focus:ring-2 focus:ring-menta/20 transition-all duration-200"
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      disabled={loading || !form.nombre || !form.email}
-                      className="mt-2 px-6 py-3.5 rounded-xl bg-menta text-white font-body font-600 text-base
-                        hover:bg-chocolate transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed
-                        flex items-center justify-center gap-2"
-                    >
-                      {loading ? (
-                        <>
-                          <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeOpacity="0.3"/>
-                            <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
-                          </svg>
-                          Suscribiendo…
-                        </>
-                      ) : 'Quiero las promos'}
-                    </button>
-                    <p className="text-xs font-body text-chocolate-light text-center">
-                      Sin spam. Podés darte de baja cuando quieras.
-                    </p>
-                    {/* INTEGRATION POINT: replace with Resend/Mailchimp — wire up API call in handleSubmit above */}
-                  </form>
-                ) : (
-                  <div className="text-center flex flex-col items-center gap-4 py-6">
-                    <div className="w-16 h-16 rounded-full bg-menta/15 border-2 border-menta flex items-center justify-center">
-                      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-label="Éxito" role="img">
-                        <path d="M6 14 L11 20 L22 8" stroke="#5B8C6E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </div>
-                    <h3 className="font-display font-700 text-2xl text-chocolate">
-                      ¡Bienvenida al club, {form.nombre.split(' ')[0]}!
-                    </h3>
-                    <p className="font-body text-chocolate-light text-sm max-w-xs">
-                      Te enviamos un email de confirmación a <strong>{form.email}</strong>. Chequeá tu bandeja de entrada.
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              {/* Email preview card */}
-              <div className="email-preview" role="img" aria-label="Vista previa de email promocional">
-                {/* Email header */}
-                <div className="bg-menta px-5 py-3 flex items-center gap-2">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-white/30"/>
-                    <div className="w-3 h-3 rounded-full bg-white/30"/>
-                    <div className="w-3 h-3 rounded-full bg-white/30"/>
-                  </div>
-                  <span className="font-body text-white/80 text-xs ml-2 flex-1 text-center">Vista previa de email</span>
-                </div>
-                {/* Email meta */}
-                <div className="px-5 py-3 border-b border-gray-100 bg-gray-50">
-                  <p className="font-body text-xs text-gray-500"><strong>De:</strong> {mockEmail.from}</p>
-                  <p className="font-body text-xs text-gray-500"><strong>Para:</strong> {mockEmail.to}</p>
-                  <p className="font-body text-xs text-gray-500"><strong>Fecha:</strong> {mockEmail.date}</p>
-                  <p className="font-body text-xs font-600 text-chocolate mt-1"><strong>Asunto:</strong> {mockEmail.subject}</p>
-                </div>
-                {/* Email body */}
-                <div className="p-5 flex flex-col gap-3">
-                  <div className="rounded-xl overflow-hidden" style={{background: 'linear-gradient(135deg, #5B8C6E, #3D5C48)'}}>
-                    <div className="p-5 text-center">
-                      <p className="font-display font-700 text-white text-xl">Los Trovadores</p>
-                      <p className="font-body text-white/80 text-xs mt-1">La esquina más helada del país</p>
-                    </div>
-                  </div>
-                  <div className="px-1">
-                    <p className="font-display font-700 text-chocolate text-lg mb-1">
-                      🍦 2x1 en Sambayón este fin de semana
-                    </p>
-                    <p className="font-body text-chocolate-light text-sm leading-relaxed">
-                      Hola {form.nombre.split(' ')[0] || 'amiga'}, este sábado y domingo llevás dos bolas de sambayón al precio de una.
-                      Válido en local, todos los turnos.
-                    </p>
-                  </div>
-                  <div className="rounded-lg bg-pistacho/20 border border-pistacho/40 p-3 text-center">
-                    <p className="font-body font-700 text-menta text-sm">Mostrá este email en caja ✓</p>
-                  </div>
-                  <p className="font-body text-gray-400 text-xs text-center mt-1">
-                    Gabriel Pereira 3202, Pocitos · Todos los días 11:00–00:00
-                  </p>
-                </div>
-              </div>
-            </div>
+          <div class="email-footer-bar">
+            Los Trovadores · Gabriel Pereira 3202, Pocitos, Montevideo · <a href="#" onclick="return false" style="color:inherit;">Darte de baja</a>
           </div>
-        </section>
-      );
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer" role="contentinfo">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">Los Trovadores</div>
+      <div class="footer-tagline">La esquina más helada del país</div>
+      <div class="footer-rating">⭐ 4.8 · 7.547 opiniones en Google</div>
+      <br/>
+      <div class="footer-adu">
+        <svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" stroke="#A8D5BA" stroke-width="1.2" fill="none"/><path d="M3.5 6l2 2 3-3" stroke="#A8D5BA" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Aprobado ADU · Sin TACC · Vegano
+      </div>
+    </div>
+    <div>
+      <div class="footer-h">Contacto</div>
+      <div class="footer-row">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5a5.5 5.5 0 100 11A5.5 5.5 0 008 1.5zM1 8a7 7 0 1114 0A7 7 0 011 8z" fill="rgba(255,255,255,0.5)"/><path d="M8 4v4l3 1.5" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Todos los días, 11:00 a 00:00 hs
+      </div>
+      <div class="footer-row">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1C5.24 1 3 3.24 3 6c0 4 5 9 5 9s5-5 5-9c0-2.76-2.24-5-5-5zm0 6.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="rgba(255,255,255,0.5)"/></svg>
+        Gabriel Pereira 3202 esq. Berro, Pocitos, Montevideo
+      </div>
+      <div class="footer-row">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3h2l1 4-1.5 1.5a9 9 0 004 4L10 11l4 1v2c0 1-1 2-2 2C5 16 0 11 0 5c0-1 1-2 2-2z" fill="rgba(255,255,255,0.5)"/></svg>
+        <div>
+          <a href="tel:27075165" style="color:rgba(255,255,255,0.8);">2707 5165</a><br/>
+          <a href="https://wa.me/59898388553" target="_blank" rel="noopener" style="color:#A8D5BA;">WhatsApp +598 98 388 553</a>
+        </div>
+      </div>
+      <div class="footer-row">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v8a1 1 0 01-1 1H2a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/><path d="M1 4l7 5 7-5" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/></svg>
+        <a href="mailto:info@lostrovadores.com.uy" style="color:rgba(255,255,255,0.8);">info@lostrovadores.com.uy</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-h">Redes sociales</div>
+      <div class="footer-social" style="margin-bottom:1rem;">
+        <a href="https://instagram.com/heladerialostrovadores" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">📷</a>
+        <a href="https://facebook.com/heladeria.lostrovadores" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">👍</a>
+        <a href="https://wa.me/59898388553" target="_blank" rel="noopener" class="social-btn" aria-label="WhatsApp">💬</a>
+      </div>
+      <div style="font-size:0.82rem;">
+        <div style="margin-bottom:0.4rem;"><a href="https://instagram.com/heladerialostrovadores" target="_blank" rel="noopener" style="color:var(--pistacho);">@heladerialostrovadores</a></div>
+        <div><a href="https://facebook.com/heladeria.lostrovadores" target="_blank" rel="noopener" style="color:var(--pistacho);">@heladeria.lostrovadores</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Heladería Los Trovadores. Todos los derechos reservados.</span>
+    <span>Gabriel Pereira 3202, Pocitos, Montevideo, Uruguay</span>
+  </div>
+</footer>
+
+<script>
+// ======== SABORES DATA ========
+const sabores = [
+  {
+    name: 'Dulce de leche granizado',
+    gradient: 'linear-gradient(135deg, #c8813a, #d4a050)',
+    scoop: '#c8813a',
+    tags: ['popular', 'sinTacc', 'diabetico'],
+  },
+  {
+    name: 'Sambayón',
+    gradient: 'linear-gradient(135deg, #e8a04a, #f0b870)',
+    scoop: '#e8a04a',
+    tags: ['popular'],
+  },
+  {
+    name: 'Chocolate',
+    gradient: 'linear-gradient(135deg, #4a2510, #6b3a20)',
+    scoop: '#5a2f18',
+    tags: ['sinTacc'],
+  },
+  {
+    name: 'Frutilla',
+    gradient: 'linear-gradient(135deg, #d4607a, #e890a0)',
+    scoop: '#d4607a',
+    tags: ['vegano', 'sinTacc'],
+  },
+  {
+    name: 'Limón',
+    gradient: 'linear-gradient(135deg, #c8d440, #dce870)',
+    scoop: '#b8c430',
+    tags: ['vegano', 'sinTacc'],
+  },
+  {
+    name: 'Dulce de leche',
+    gradient: 'linear-gradient(135deg, #b87830, #c89050)',
+    scoop: '#b87830',
+    tags: ['diabetico'],
+  },
+  {
+    name: 'Maracuyá',
+    gradient: 'linear-gradient(135deg, #e89020, #f0a840)',
+    scoop: '#e89020',
+    tags: ['vegano', 'sinTacc'],
+  },
+  {
+    name: 'Torta Helada',
+    gradient: 'linear-gradient(135deg, #5B8C6E, #A8D5BA)',
+    scoop: '#5B8C6E',
+    tags: ['featured'],
+  },
+];
+
+const tagLabels = {
+  popular: { label: 'Popular', cls: 'tag-popular' },
+  featured: { label: '⭐ Destacado', cls: 'tag-featured' },
+  vegano: { label: '🌿 Vegano', cls: 'tag-vegano' },
+  sinTacc: { label: '🌾 Sin TACC', cls: 'tag-sinTacc' },
+  diabetico: { label: '💚 Apto diabéticos', cls: 'tag-diabetico' },
+};
+
+function renderSabores() {
+  const grid = document.getElementById('sabores-grid');
+  sabores.forEach((s, i) => {
+    const tagsHtml = s.tags.map(t => `<span class="tag ${tagLabels[t].cls}">${tagLabels[t].label}</span>`).join('');
+    grid.innerHTML += `
+      <div class="sabor-card fade-in" style="animation-delay:${i * 0.06}s">
+        <div class="sabor-swatch" style="background:${s.gradient}">
+          <div class="sabor-scoop" style="background:${s.scoop};"></div>
+        </div>
+        <div class="sabor-body">
+          <div class="sabor-name">${s.name}</div>
+          <div class="sabor-tags">${tagsHtml}</div>
+        </div>
+      </div>`;
+  });
+}
+
+// ======== CONE MEDIDOR ========
+const scoopColors = ['#c8a97e', '#f8b878', '#6b3a2a', '#e8a0b8', '#A8D5BA'];
+const scoopY   = [118, 86, 57, 31, 9];
+const scoopR   = [26,  24,  22, 20, 18];
+
+function renderCone(pts) {
+  const total = 500;
+  const filled = Math.min(5, Math.round((pts / total) * 5));
+  const group = document.getElementById('scoops-group');
+  let html = '';
+  for (let i = 0; i < 5; i++) {
+    const color = scoopColors[i];
+    const cy = scoopY[i];
+    const r  = scoopR[i];
+    if (i < filled) {
+      html += `
+        <circle cx="100" cy="${cy}" r="${r}" fill="${color}"/>
+        <circle cx="${100 - r*0.35}" cy="${cy - r*0.3}" r="${r*0.22}" fill="rgba(255,255,255,0.28)" />
+        <circle cx="100" cy="${cy}" r="${r}" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      `;
     }
+  }
+  // drip if 3+ scoops
+  if (filled >= 3) {
+    html += `<ellipse cx="118" cy="118" rx="4" ry="8" fill="${scoopColors[0]}" opacity="0.7"/>`;
+  }
+  group.innerHTML = html;
+}
 
-    /* ─── FOOTER ────────────────────────────────────────────── */
-    function Footer() {
-      return (
-        <footer
-          id="contacto"
-          className="bg-chocolate text-white pt-16 pb-8 px-4"
-          role="contentinfo"
-          aria-label="Información de contacto y pie de página"
-        >
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-              {/* Brand */}
-              <div className="lg:col-span-1">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-2xl" aria-hidden="true">🍦</span>
-                  <span className="font-display font-700 text-2xl text-white">Los Trovadores</span>
-                </div>
-                <p className="font-body text-white/60 text-sm leading-relaxed mb-4">
-                  Más de 70 años haciendo la esquina más helada del país. Artesanal, familiar, para todos.
-                </p>
-                {/* Google rating */}
-                <div className="inline-flex items-center gap-2 bg-white/10 border border-white/15 px-3 py-1.5 rounded-full mb-3">
-                  <div className="flex gap-0.5" aria-label={`${BRAND.rating} estrellas en Google`}>
-                    {[1,2,3,4,5].map(i => (
-                      <svg key={i} width="12" height="12" viewBox="0 0 12 12" fill={i <= 4 ? '#FCD34D' : 'none'} aria-hidden="true">
-                        <path d="M6 1l1.2 2.5L10 4l-2 1.95.47 2.75L6 7.5 3.53 8.7 4 5.95 2 4l2.8-.5z" stroke="#FCD34D" strokeWidth="0.5"/>
-                      </svg>
-                    ))}
-                  </div>
-                  <span className="text-white font-body font-600 text-xs">{BRAND.rating}</span>
-                  <span className="text-white/60 text-xs font-body">{BRAND.reviewCount} opiniones</span>
-                </div>
-                {/* ADU badge small */}
-                <div>
-                  <AduBadge size={44} className="opacity-80" />
-                </div>
-              </div>
+function updateMedidor(pts) {
+  document.getElementById('pts-display').innerHTML = `${pts}<span>puntos</span>`;
+  document.getElementById('pts-label').textContent = `${pts} puntos acumulados`;
+  renderCone(pts);
+  const remaining = 500 - pts;
+  const msg = document.getElementById('reward-msg');
+  if (pts >= 500) {
+    msg.className = 'reward-msg ready';
+    msg.innerHTML = '🎉 ¡Tenés un helado gratis! Mostrá esto en caja.';
+  } else {
+    msg.className = 'reward-msg close';
+    msg.innerHTML = `¡Te faltan <span id="pts-remaining">${remaining}</span> puntos para tu helado gratis!`;
+  }
+}
 
-              {/* Contact */}
-              <div>
-                <h3 className="font-display font-600 text-base mb-4 text-pistacho">Contacto</h3>
-                <ul className="flex flex-col gap-3">
-                  <li>
-                    <a
-                      href={`https://maps.google.com/?q=Gabriel+Pereira+3202+Montevideo`}
-                      className="font-body text-white/70 text-sm hover:text-white transition-colors duration-200 flex items-start gap-2"
-                      target="_blank" rel="noopener noreferrer"
-                      aria-label="Ver en mapa: Gabriel Pereira 3202, esquina Berro, Pocitos, Montevideo"
-                    >
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="mt-0.5 flex-shrink-0" aria-hidden="true">
-                        <path d="M8 1C5.24 1 3 3.24 3 6c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5z"/>
-                        <circle cx="8" cy="6" r="1.5"/>
-                      </svg>
-                      {BRAND.address}<br />{BRAND.city}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={`tel:${BRAND.phone.replace(/\s/g, '')}`}
-                      className="font-body text-white/70 text-sm hover:text-white transition-colors duration-200 flex items-center gap-2"
-                      aria-label={`Llamar al ${BRAND.phone}`}
-                    >
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="flex-shrink-0" aria-hidden="true">
-                        <path d="M2 3a1 1 0 011-1h1.5a1 1 0 011 .89l.5 3a1 1 0 01-.29.93l-1 .9a9 9 0 004.47 4.47l.9-1a1 1 0 01.93-.29l3 .5a1 1 0 01.89 1V13a1 1 0 01-1 1C6.42 14 2 9.58 2 4V3z" strokeLinecap="round"/>
-                      </svg>
-                      {BRAND.phone}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={BRAND.whatsappLink}
-                      className="font-body text-white/70 text-sm hover:text-white transition-colors duration-200 flex items-center gap-2"
-                      target="_blank" rel="noopener noreferrer"
-                      aria-label={`WhatsApp: ${BRAND.whatsapp}`}
-                    >
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="flex-shrink-0 opacity-70" aria-hidden="true">
-                        <path d="M8 1C4.14 1 1 4.14 1 8c0 1.24.33 2.41.9 3.42L1 15l3.67-.88A6.97 6.97 0 008 15c3.86 0 7-3.14 7-7s-3.14-7-7-7zm3.57 9.57c-.15.42-.88.82-1.22.87-.31.04-.7.06-1.13-.07-.26-.08-.59-.19-.99-.39-1.74-.84-2.87-2.6-2.96-2.72-.09-.12-.73-.97-.73-1.85s.46-1.31.63-1.49c.15-.17.33-.21.44-.21h.32c.1 0 .24-.04.37.28.14.33.46 1.12.5 1.2.04.08.07.17.01.28-.05.1-.08.17-.15.26l-.22.27c-.07.07-.15.15-.06.3.08.14.37.62.8 1a4.54 4.54 0 001.12.78c.14.07.23.06.31-.04l.47-.57c.08-.1.16-.12.27-.07.1.04 1.07.5 1.25.59.18.09.3.13.34.2.05.08.05.44-.1.86z"/>
-                      </svg>
-                      WhatsApp {BRAND.whatsapp}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={`mailto:${BRAND.email}`}
-                      className="font-body text-white/70 text-sm hover:text-white transition-colors duration-200 flex items-center gap-2"
-                      aria-label={`Email: ${BRAND.email}`}
-                    >
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="flex-shrink-0" aria-hidden="true">
-                        <rect x="1" y="3" width="14" height="10" rx="1.5"/>
-                        <path d="M1 5l7 5 7-5" strokeLinecap="round"/>
-                      </svg>
-                      {BRAND.email}
-                    </a>
-                  </li>
-                </ul>
-              </div>
+// ======== FORM ========
+document.getElementById('promo-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const nombre = document.getElementById('sub-nombre').value.trim();
+  const email  = document.getElementById('sub-email').value.trim();
+  if (!nombre || !email) return;
+  // INTEGRATION POINT: replace with Resend/Mailchimp/SendGrid API call
+  // e.g. await fetch('/api/subscribe', { method: 'POST', body: JSON.stringify({ nombre, email }) })
+  document.getElementById('form-box').classList.add('hide');
+  document.getElementById('success-name').textContent = nombre;
+  document.getElementById('success-box').classList.add('show');
+});
 
-              {/* Hours */}
-              <div>
-                <h3 className="font-display font-600 text-base mb-4 text-pistacho">Horarios</h3>
-                <div className="flex items-start gap-2 mb-3">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="mt-0.5 text-white/50 flex-shrink-0" aria-hidden="true">
-                    <circle cx="8" cy="8" r="6.5"/>
-                    <path d="M8 4.5v4l2.5 1.5" strokeLinecap="round"/>
-                  </svg>
-                  <div>
-                    <p className="font-body text-white/70 text-sm">Todos los días</p>
-                    <p className="font-body text-white font-600 text-sm">11:00 — 00:00 hs</p>
-                  </div>
-                </div>
-                <div className="mt-4 p-3 rounded-xl bg-white/8 border border-white/10">
-                  <p className="font-body text-white/60 text-xs leading-relaxed">
-                    Delivery disponible por WhatsApp.<br />
-                    Para tortas heladas, encargá con al menos 48 hs de anticipación.
-                  </p>
-                </div>
-              </div>
+// ======== NAVBAR scroll ========
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 10);
+});
 
-              {/* Social */}
-              <div>
-                <h3 className="font-display font-600 text-base mb-4 text-pistacho">Redes sociales</h3>
-                <div className="flex flex-col gap-3">
-                  <a
-                    href={BRAND.instagram}
-                    className="flex items-center gap-3 text-white/70 hover:text-white transition-colors duration-200 group"
-                    target="_blank" rel="noopener noreferrer"
-                    aria-label={`Instagram: ${BRAND.instagramHandle}`}
-                  >
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-200">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden="true">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                      </svg>
-                    </div>
-                    <span className="font-body text-sm">{BRAND.instagramHandle}</span>
-                  </a>
-                  <a
-                    href={BRAND.facebook}
-                    className="flex items-center gap-3 text-white/70 hover:text-white transition-colors duration-200 group"
-                    target="_blank" rel="noopener noreferrer"
-                    aria-label={`Facebook: ${BRAND.facebookHandle}`}
-                  >
-                    <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-200">
-                      <svg width="10" height="18" viewBox="0 0 10 18" fill="white" aria-hidden="true">
-                        <path d="M6.5 18V9.9H9l.45-3H6.5V5.1c0-.87.24-1.46 1.5-1.46H9.5V.9C9.5.9 8.35.8 7.1.8 4.63.8 2.97 2.3 2.97 5.1v1.8H.5v3h2.47V18H6.5z"/>
-                      </svg>
-                    </div>
-                    <span className="font-body text-sm">{BRAND.facebookHandle}</span>
-                  </a>
-                  <a
-                    href={BRAND.whatsappLink}
-                    className="flex items-center gap-3 text-white/70 hover:text-white transition-colors duration-200 group"
-                    target="_blank" rel="noopener noreferrer"
-                    aria-label="Pedir delivery por WhatsApp"
-                  >
-                    <div className="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-200">
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="white" aria-hidden="true">
-                        <path d="M8 1C4.14 1 1 4.14 1 8c0 1.24.33 2.41.9 3.42L1 15l3.67-.88A6.97 6.97 0 008 15c3.86 0 7-3.14 7-7s-3.14-7-7-7zm3.57 9.57c-.15.42-.88.82-1.22.87-.31.04-.7.06-1.13-.07-.26-.08-.59-.19-.99-.39-1.74-.84-2.87-2.6-2.96-2.72-.09-.12-.73-.97-.73-1.85s.46-1.31.63-1.49c.15-.17.33-.21.44-.21h.32c.1 0 .24-.04.37.28.14.33.46 1.12.5 1.2.04.08.07.17.01.28-.05.1-.08.17-.15.26l-.22.27c-.07.07-.15.15-.06.3.08.14.37.62.8 1a4.54 4.54 0 001.12.78c.14.07.23.06.31-.04l.47-.57c.08-.1.16-.12.27-.07.1.04 1.07.5 1.25.59.18.09.3.13.34.2.05.08.05.44-.1.86z"/>
-                      </svg>
-                    </div>
-                    <span className="font-body text-sm">Delivery por WhatsApp</span>
-                  </a>
-                </div>
-              </div>
-            </div>
+// ======== HAMBURGER ========
+document.getElementById('ham-btn').addEventListener('click', function() {
+  const menu = document.getElementById('mobile-menu');
+  const open = menu.classList.toggle('open');
+  this.setAttribute('aria-expanded', open);
+});
+document.querySelectorAll('#mobile-menu a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('ham-btn').setAttribute('aria-expanded', 'false');
+  });
+});
 
-            {/* Bottom bar */}
-            <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-              <p className="font-body text-white/40 text-xs">
-                © {new Date().getFullYear()} Heladería Los Trovadores. Todos los derechos reservados.
-              </p>
-              <p className="font-body text-white/40 text-xs">
-                Gabriel Pereira 3202 esq. Berro · Pocitos · Montevideo
-              </p>
-            </div>
-          </div>
-        </footer>
-      );
-    }
+// ======== SLIDER ========
+document.getElementById('pts-slider').addEventListener('input', function() {
+  updateMedidor(parseInt(this.value));
+});
 
-    /* ─── APP ───────────────────────────────────────────────── */
-    function App() {
-      // Intersection observer for section reveals
-      useEffect(() => {
-        const sections = document.querySelectorAll('.section-reveal');
-        const obs = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-            }
-          });
-        }, { threshold: 0.08 });
-        sections.forEach(s => obs.observe(s));
-        return () => obs.disconnect();
-      }, []);
+// ======== SCROLL FADE ========
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+function observeFade() {
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
 
-      return (
-        <>
-          <Navbar />
-          <main>
-            <Hero />
-            <HeladeriaParaTodos />
-            <Sabores />
-            <ComoFunciona />
-            <MedidorHelado />
-            <Suscripcion />
-          </main>
-          <Footer />
-        </>
-      );
-    }
-
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
-  </script>
+// ======== INIT ========
+renderSabores();
+updateMedidor(340);
+observeFade();
+</script>
 </body>
 </html>
