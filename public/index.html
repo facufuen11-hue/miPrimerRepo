@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VIH Interactivo</title>
+<meta name="description" content="Sitio educativo interactivo sobre VIH: qué es, cómo se transmite, cómo se previene y un juego con ranking en vivo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a href="#inicio" class="brand">VIH<span>Interactivo</span></a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="mainNav">
+      <a href="#que-es">Qué es</a>
+      <a href="#vih-sida">VIH y sida</a>
+      <a href="#transmision">Transmisión</a>
+      <a href="#prevencion">Prevención</a>
+      <a href="#tratamiento">Tratamiento</a>
+      <a href="#juego" class="nav__cta">Jugar 🎮</a>
+      <a href="#ranking">Ranking</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- INICIO -->
+  <section id="inicio" class="hero">
+    <div class="hero__content">
+      <p class="eyebrow">Educación sexual · Liceo</p>
+      <h1>Hablemos de VIH<br><span>sin vueltas y sin mitos.</span></h1>
+      <p class="hero__lead">
+        En esta página vas a aprender qué es el VIH, cómo se transmite (y cómo <strong>no</strong> se transmite),
+        cómo prevenirlo y cómo es el tratamiento hoy en día. Al final, ¡hay un juego para competir con
+        toda la clase desde el celular!
+      </p>
+      <div class="hero__actions">
+        <a href="#que-es" class="btn btn--primary">Empezar a aprender</a>
+        <a href="#juego" class="btn btn--ghost">Ir directo al juego</a>
+      </div>
+    </div>
+    <div class="hero__ribbon" aria-hidden="true">🎗️</div>
+  </section>
+
+  <!-- QUE ES EL VIH -->
+  <section id="que-es" class="section">
+    <div class="section__inner">
+      <p class="section__kicker">01 · Lo básico</p>
+      <h2>¿Qué es el VIH?</h2>
+      <div class="two-col">
+        <div>
+          <p>
+            El <strong>VIH (Virus de Inmunodeficiencia Humana)</strong> es un virus que ataca el sistema
+            inmunológico, específicamente unas células de defensa llamadas <strong>linfocitos CD4</strong>.
+            Sin tratamiento, el virus va debilitando las defensas del cuerpo con el paso del tiempo.
+          </p>
+          <p>
+            Hoy en día el VIH <strong>no es una sentencia de muerte ni una enfermedad "de riesgo" para
+            ciertos grupos</strong>: es un virus que puede afectar a cualquier persona, y que con diagnóstico
+            y tratamiento a tiempo permite tener una vida larga y saludable.
+          </p>
+        </div>
+        <div class="card card--info">
+          <h3>Dato clave</h3>
+          <p>El VIH se transmite de persona a persona. <strong>No se contagia</strong> por el aire, por
+          compartir espacios, ni por contacto cotidiano como saludar, abrazar o compartir el mate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIH VS SIDA -->
+  <section id="vih-sida" class="section section--alt">
+    <div class="section__inner">
+      <p class="section__kicker">02 · Una confusión muy común</p>
+      <h2>VIH no es lo mismo que sida</h2>
+      <div class="compare">
+        <div class="compare__card">
+          <h3>VIH</h3>
+          <p>Es el <strong>virus</strong>. Una persona puede vivir con VIH durante toda su vida, con
+          tratamiento, sin desarrollar sida y sin transmitirlo si mantiene la carga viral indetectable.</p>
+        </div>
+        <div class="compare__vs">VS</div>
+        <div class="compare__card compare__card--dark">
+          <h3>Sida</h3>
+          <p>Es la <strong>etapa avanzada</strong> de la infección por VIH, que aparece solo si el virus
+          no se trata durante mucho tiempo y el sistema inmune queda muy debilitado. Con el tratamiento
+          actual, llegar a esta etapa es evitable.</p>
+        </div>
+      </div>
+      <div class="callout callout--teal">
+        <strong>Indetectable = Intransmisible (I=I):</strong> una persona en tratamiento, con carga viral
+        indetectable sostenida, <strong>no transmite el VIH por vía sexual</strong>. Es ciencia respaldada
+        por la OMS y estudios internacionales.
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSMISION -->
+  <section id="transmision" class="section">
+    <div class="section__inner">
+      <p class="section__kicker">03 · Los 5 fluidos</p>
+      <h2>¿Cómo se transmite el VIH?</h2>
+      <p class="section__lead">
+        El VIH se transmite únicamente a través de <strong>5 fluidos corporales</strong>, y solo si logran
+        entrar al torrente sanguíneo (por una mucosa, una herida o una vía directa).
+      </p>
+      <div class="fluid-grid">
+        <div class="fluid-card"><span class="fluid-card__icon">🩸</span><h3>Sangre</h3></div>
+        <div class="fluid-card"><span class="fluid-card__icon">💧</span><h3>Semen y líquido preseminal</h3></div>
+        <div class="fluid-card"><span class="fluid-card__icon">💦</span><h3>Secreciones vaginales</h3></div>
+        <div class="fluid-card"><span class="fluid-card__icon">🍼</span><h3>Leche materna</h3></div>
+        <div class="fluid-card"><span class="fluid-card__icon">🔸</span><h3>Secreciones rectales</h3></div>
+      </div>
+      <div class="callout callout--red">
+        <strong>Vías de transmisión reales:</strong> relaciones sexuales sin protección, compartir agujas
+        o jeringas, y de madre a bebé (embarazo, parto o lactancia) sin tratamiento.
+      </div>
+      <p class="section__note">
+        Fluidos como la <strong>saliva, el sudor, las lágrimas, la orina</strong> o compartir objetos como
+        el mate, cubiertos o el inodoro <strong>no transmiten el VIH</strong>. ¡Vas a poner esto a prueba
+        en el juego!
+      </p>
+    </div>
+  </section>
+
+  <!-- PREVENCION -->
+  <section id="prevencion" class="section section--alt">
+    <div class="section__inner">
+      <p class="section__kicker">04 · Cuidarse es fácil</p>
+      <h2>Prevención</h2>
+      <div class="prevent-grid">
+        <div class="prevent-card">
+          <span class="prevent-card__icon">🧴</span>
+          <h3>Preservativo</h3>
+          <p>El uso correcto del preservativo (externo o interno) en cada relación sexual es la forma
+          más efectiva y accesible de prevenir el VIH y otras ITS.</p>
+        </div>
+        <div class="prevent-card">
+          <span class="prevent-card__icon">💊</span>
+          <h3>PrEP</h3>
+          <p>Profilaxis Pre-Exposición: una pastilla diaria que reduce muchísimo el riesgo de adquirir
+          VIH en personas VIH negativas con exposición frecuente. Se consigue en el sistema de salud.</p>
+        </div>
+        <div class="prevent-card">
+          <span class="prevent-card__icon">⏱️</span>
+          <h3>PEP</h3>
+          <p>Profilaxis Post-Exposición: tratamiento de emergencia que se inicia idealmente dentro de las
+          72 horas luego de una posible exposición al virus. Cuanto antes, mejor.</p>
+        </div>
+        <div class="prevent-card">
+          <span class="prevent-card__icon">🧪</span>
+          <h3>Testeo</h3>
+          <p>Hacerse el test de VIH es voluntario, gratuito y confidencial. Conocer tu estado es cuidarte
+          a vos y a las personas con las que estás.</p>
+        </div>
+        <div class="prevent-card">
+          <span class="prevent-card__icon">🚫💉</span>
+          <h3>No compartir agujas</h3>
+          <p>No compartir jeringas ni elementos punzantes evita la transmisión por sangre.</p>
+        </div>
+        <div class="prevent-card">
+          <span class="prevent-card__icon">🗣️</span>
+          <h3>Hablarlo sin miedo</h3>
+          <p>Hablar de sexualidad, testeo y cuidados con la pareja y el equipo de salud reduce el estigma
+          y mejora la prevención.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRATAMIENTO -->
+  <section id="tratamiento" class="section">
+    <div class="section__inner">
+      <p class="section__kicker">05 · Se puede vivir bien con VIH</p>
+      <h2>Tratamiento</h2>
+      <div class="two-col">
+        <div>
+          <p>
+            El tratamiento se llama <strong>TARV (Terapia Antirretroviral)</strong>: combinaciones de
+            medicamentos que se toman diariamente y que <strong>reducen la cantidad de virus en sangre</strong>
+            hasta niveles indetectables.
+          </p>
+          <p>
+            No cura el VIH, pero permite que la persona tenga una <strong>expectativa y calidad de vida
+            similar a la de cualquier otra persona</strong>, y que no transmita el virus por vía sexual
+            (I=I). En Uruguay, el tratamiento se accede de forma gratuita a través del sistema de salud.
+          </p>
+        </div>
+        <div class="card card--dark">
+          <h3>En resumen</h3>
+          <ul class="check-list">
+            <li>Se toma todos los días, de por vida.</li>
+            <li>Baja la carga viral hasta hacerla indetectable.</li>
+            <li>Indetectable = intransmisible por vía sexual.</li>
+            <li>Es gratuito en el sistema de salud uruguayo.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JUEGO -->
+  <section id="juego" class="section section--game">
+    <div class="section__inner">
+      <p class="section__kicker">06 · A jugar</p>
+      <h2>Desafío VIH: ¿cuánto sabés?</h2>
+      <p class="section__lead">8 preguntas de trivia + 1 desafío de arrastrar y soltar. Sumá puntos y
+      subí al ranking en vivo de toda la clase.</p>
+
+      <div class="game-shell" id="gameShell">
+
+        <!-- Pantalla de inicio del juego -->
+        <div class="game-screen is-active" data-screen="start">
+          <div class="game-card">
+            <h3>¿Listo para jugar?</h3>
+            <p>8 preguntas (10 pts c/u) + 10 elementos para clasificar (10 pts c/u). Puntaje máximo: 180 pts.</p>
+            <button class="btn btn--primary btn--lg" id="startGameBtn">Empezar el juego</button>
+          </div>
+        </div>
+
+        <!-- Trivia -->
+        <div class="game-screen" data-screen="trivia">
+          <div class="game-progress">
+            <div class="game-progress__bar"><div class="game-progress__fill" id="triviaProgressFill"></div></div>
+            <span id="triviaProgressLabel">Pregunta 1 de 8</span>
+          </div>
+          <div class="game-card">
+            <h3 id="triviaQuestion">—</h3>
+            <div class="trivia-options" id="triviaOptions"></div>
+            <p class="trivia-feedback" id="triviaFeedback" hidden></p>
+            <button class="btn btn--primary" id="triviaNextBtn" hidden>Siguiente →</button>
+          </div>
+        </div>
+
+        <!-- Drag & drop -->
+        <div class="game-screen" data-screen="drag">
+          <div class="game-card game-card--wide">
+            <h3>Arrastrá cada elemento a donde corresponda</h3>
+            <p class="drag-hint">Tocá y arrastrá (o hacé clic y arrastrá) cada chip hacia "Transmite" o
+            "No transmite". Cada elemento cuenta una sola vez.</p>
+            <div class="drag-progress"><span id="dragProgressLabel">0 / 10 clasificados</span></div>
+
+            <div class="drag-pool" id="dragPool" aria-label="Elementos para clasificar"></div>
+
+            <div class="drop-zones">
+              <div class="drop-zone drop-zone--yes" data-zone="yes">
+                <h4>✅ Transmite el VIH</h4>
+                <div class="drop-zone__items" id="dropYes"></div>
+              </div>
+              <div class="drop-zone drop-zone--no" data-zone="no">
+                <h4>🚫 No transmite el VIH</h4>
+                <div class="drop-zone__items" id="dropNo"></div>
+              </div>
+            </div>
+
+            <button class="btn btn--primary btn--lg" id="finishGameBtn" hidden>Terminar y ver mi puntaje</button>
+          </div>
+        </div>
+
+        <!-- Resultado + envío -->
+        <div class="game-screen" data-screen="result">
+          <div class="game-card">
+            <h3>¡Terminaste! 🎉</h3>
+            <div class="score-breakdown" id="scoreBreakdown"></div>
+            <form id="submitScoreForm" class="submit-form">
+              <label for="playerName">Tu nombre (para el ranking)</label>
+              <input type="text" id="playerName" maxlength="24" placeholder="Ej: Facu R." required autocomplete="off">
+              <button type="submit" class="btn btn--primary btn--lg" id="submitScoreBtn">Enviar puntaje al ranking</button>
+            </form>
+            <p class="submit-status" id="submitStatus" hidden></p>
+            <button class="btn btn--ghost" id="playAgainBtn" hidden>Jugar de nuevo</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RANKING -->
+  <section id="ranking" class="section section--alt">
+    <div class="section__inner">
+      <p class="section__kicker">🏆 En vivo</p>
+      <h2>Ranking de la clase</h2>
+      <p class="section__lead">Se actualiza solo, en tiempo real, apenas alguien envía su puntaje.</p>
+      <div class="leaderboard">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Nombre</th><th>Puntaje</th></tr>
+          </thead>
+          <tbody id="leaderboardBody">
+            <tr class="leaderboard__empty"><td colspan="3">Todavía nadie jugó. ¡Sé el primero! 🚀</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Material educativo para uso en el aula · Basado en información de OMS/ONUSIDA y el sistema de salud uruguayo.</p>
+  <a href="/admin" class="footer-admin-link">Panel docente</a>
+</footer>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>

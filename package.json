@@ -1,0 +1,21 @@
+{
+  "name": "vih-interactivo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio educativo interactivo sobre VIH con juego y ranking en vivo (Socket.io)",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel docente · VIH Interactivo</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+<style>
+  body{background:var(--ink);color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .admin-box{background:var(--card);color:var(--ink);border-radius:var(--radius);padding:32px;max-width:420px;width:100%;box-shadow:var(--shadow)}
+  .admin-box h1{font-size:1.5rem}
+  .admin-box input{width:100%;padding:14px;border-radius:12px;border:1.5px solid var(--border);margin:14px 0;font-size:1rem;font-family:inherit;box-sizing:border-box}
+  .admin-box .btn{width:100%;margin-top:6px}
+  .admin-actions{display:none;margin-top:18px;gap:12px;flex-direction:column}
+  .admin-actions.is-visible{display:flex}
+  .msg{font-weight:600;margin-top:10px}
+  .msg.error{color:var(--red)}
+  .msg.ok{color:var(--teal)}
+  a.btn{text-decoration:none;text-align:center}
+  .back{display:inline-block;margin-top:20px;color:var(--ink-soft);font-size:.9rem}
+</style>
+</head>
+<body>
+  <div class="admin-box">
+    <h1>🔒 Panel docente</h1>
+    <p>Ingresá la contraseña para gestionar el ranking de la clase.</p>
+    <form id="loginForm">
+      <input type="password" id="passwordInput" placeholder="Contraseña" required autocomplete="off">
+      <button type="submit" class="btn btn--primary">Ingresar</button>
+    </form>
+    <p class="msg" id="loginMsg"></p>
+
+    <div class="admin-actions" id="adminActions">
+      <button class="btn btn--ghost" id="resetBtn">🗑️ Reiniciar ranking</button>
+      <a class="btn btn--ghost" id="exportLink" href="#">⬇️ Exportar resultados (CSV)</a>
+      <a class="btn btn--ghost" href="/qr">📱 Ver código QR</a>
+    </div>
+
+    <a href="/" class="back">← Volver al sitio</a>
+  </div>
+
+<script src="/js/admin.js"></script>
+</body>
+</html>
