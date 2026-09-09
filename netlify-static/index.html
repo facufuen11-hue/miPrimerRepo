@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VIH Interactivo</title>
+<meta name="description" content="Sitio educativo interactivo sobre VIH: qué es, transmisión, prevención, tratamiento y un cuestionario final.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎗️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a href="#inicio" class="brand">VIH<span>Interactivo</span></a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="mainNav">
+      <a href="#que-es">Qué es</a>
+      <a href="#vih-sida">VIH y sida</a>
+      <a href="#transmision">Transmisión</a>
+      <a href="#prevencion">Prevención</a>
+      <a href="#tratamiento">Tratamiento</a>
+      <a href="#cuestionario" class="nav__cta">Cuestionario ✏️</a>
+      <a href="#fuentes">Fuentes</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. INICIO -->
+  <section id="inicio" class="hero">
+    <div class="hero__content">
+      <p class="eyebrow">Educación sexual · Liceo</p>
+      <h1>Hablemos de VIH<br><span>sin vueltas y sin mitos.</span></h1>
+      <p class="hero__lead">
+        Qué es, cómo se transmite (y cómo <strong>no</strong> se transmite), cómo prevenirlo y cómo es
+        el tratamiento hoy en día. Al final, un cuestionario para poner a prueba lo aprendido.
+      </p>
+      <div class="hero__stat">
+        <span class="hero__stat-number">~40 millones</span>
+        <span class="hero__stat-label">de personas viven con VIH en el mundo hoy (ONUSIDA). Con
+        diagnóstico y tratamiento a tiempo, tienen una vida larga y saludable.</span>
+      </div>
+      <div class="hero__actions">
+        <a href="#que-es" class="btn btn--primary">Empezar a aprender</a>
+        <a href="#cuestionario" class="btn btn--ghost">Ir al cuestionario</a>
+      </div>
+    </div>
+    <div class="hero__ribbon" aria-hidden="true">🎗️</div>
+  </section>
+
+  <!-- 2. QUE ES EL VIH -->
+  <section id="que-es" class="section">
+    <div class="section__inner">
+      <p class="section__kicker">01 · Lo básico</p>
+      <h2>¿Qué es el VIH?</h2>
+      <div class="two-col">
+        <div>
+          <p>
+            El <strong>VIH (Virus de Inmunodeficiencia Humana)</strong> es un <strong>retrovirus</strong>:
+            un virus que guarda su información genética en ARN y usa una enzima (la
+            <strong>transcriptasa reversa</strong>) para copiarla a ADN e integrarse al genoma de la
+            célula que infecta.
+          </p>
+          <p>
+            Ataca principalmente a los <strong>linfocitos T CD4+</strong>, células clave del sistema
+            inmunológico. Sin tratamiento, la cantidad de CD4 baja con el tiempo y el cuerpo queda cada
+            vez más expuesto a infecciones que normalmente podría controlar.
+          </p>
+          <p>
+            Existen dos tipos principales: <strong>VIH-1</strong> (el más frecuente en el mundo) y
+            <strong>VIH-2</strong> (menos común). El VIH <strong>no es lo mismo que el sida</strong> —
+            eso lo vemos en la próxima sección.
+          </p>
+        </div>
+        <div class="card card--info">
+          <h3>Dato clave</h3>
+          <p>El VIH se transmite de persona a persona, únicamente a través de ciertos fluidos
+          corporales. <strong>No se contagia</strong> por el aire, ni por contacto cotidiano como
+          saludar, abrazar o compartir espacios.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. VIH VS SIDA -->
+  <section id="vih-sida" class="section section--alt">
+    <div class="section__inner">
+      <p class="section__kicker">02 · Una confusión muy común</p>
+      <h2>VIH no es lo mismo que sida</h2>
+      <div class="compare">
+        <div class="compare__card">
+          <h3>VIH</h3>
+          <p>Es el <strong>virus</strong>. Una persona puede vivir con VIH toda su vida, con
+          tratamiento, sin desarrollar sida y sin transmitirlo si mantiene la carga viral indetectable.</p>
+        </div>
+        <div class="compare__vs">VS</div>
+        <div class="compare__card compare__card--dark">
+          <h3>Sida</h3>
+          <p>Es la <strong>etapa avanzada</strong> de la infección por VIH, que aparece solo si el
+          virus no se trata durante mucho tiempo y el sistema inmune queda muy debilitado. Con el
+          tratamiento actual, llegar a esta etapa es evitable.</p>
+        </div>
+      </div>
+      <div class="callout callout--teal">
+        <strong>Indetectable = Intransmisible (I=I):</strong> una persona en tratamiento, con carga
+        viral indetectable sostenida, <strong>no transmite el VIH por vía sexual</strong>. Es ciencia
+        respaldada por la OMS y estudios internacionales.
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. TRANSMISION -->
+  <section id="transmision" class="section">
+    <div class="section__inner">
+      <p class="section__kicker">03 · Los 5 fluidos</p>
+      <h2>¿Cómo se transmite el VIH?</h2>
+      <p class="section__lead">
+        El VIH se transmite únicamente a través de <strong>5 fluidos corporales</strong>, y solo si
+        logran entrar al torrente sanguíneo (por una mucosa, una herida o una vía directa). Tocá cada
+        uno para ver más detalle.
+      </p>
+
+      <div class="fluid-grid" id="fluidGrid">
+        <button type="button" class="fluid-card" data-fluid="sangre">
+          <span class="fluid-card__icon">🩸</span><h3>Sangre</h3>
+        </button>
+        <button type="button" class="fluid-card" data-fluid="semen">
+          <span class="fluid-card__icon">💧</span><h3>Semen y líquido preseminal</h3>
+        </button>
+        <button type="button" class="fluid-card" data-fluid="vaginales">
+          <span class="fluid-card__icon">💦</span><h3>Secreciones vaginales</h3>
+        </button>
+        <button type="button" class="fluid-card" data-fluid="leche">
+          <span class="fluid-card__icon">🍼</span><h3>Leche materna</h3>
+        </button>
+        <button type="button" class="fluid-card" data-fluid="rectales">
+          <span class="fluid-card__icon">🔸</span><h3>Secreciones rectales</h3>
+        </button>
+      </div>
+
+      <div class="fluid-detail" id="fluidDetail" hidden>
+        <p id="fluidDetailText"></p>
+      </div>
+
+      <div class="callout callout--red">
+        <strong>Vías de transmisión reales:</strong> relaciones sexuales sin protección, compartir
+        agujas o jeringas, y de madre a bebé (embarazo, parto o lactancia) sin tratamiento.
+      </div>
+
+      <h3 class="mitos-title">Mitos y verdades</h3>
+      <p class="section__note">Tocá cada frase para ver si es mito o verdad.</p>
+      <div class="accordion" id="mitosAccordion"></div>
+    </div>
+  </section>
+
+  <!-- 5. PREVENCION -->
+  <section id="prevencion" class="section section--alt">
+    <div class="section__inner">
+      <p class="section__kicker">04 · Cuidarse es fácil</p>
+      <h2>Prevención</h2>
+      <div class="prevent-grid">
+        <div class="prevent-card">
+          <span class="prevent-card__icon">🧴</span>
+          <h3>Preservativo</h3>
+          <p>El uso correcto del preservativo (externo o interno) en cada relación sexual es la forma
+          más efectiva y accesible de prevenir el VIH y otras ITS.</p>
+        </div>
+        <div class="prevent-card">
+          <span class="prevent-card__icon">💊</span>
+          <h3>PrEP</h3>
+          <p>Profilaxis Pre-Exposición: una pastilla diaria que reduce muchísimo el riesgo de adquirir
+          VIH en personas VIH negativas con exposición frecuente. Se consigue en el sistema de salud.</p>
+        </div>
+        <div class="prevent-card">
+          <span class="prevent-card__icon">⏱️</span>
+          <h3>PEP</h3>
+          <p>Profilaxis Post-Exposición: tratamiento de emergencia que se inicia idealmente dentro de
+          las 72 horas luego de una posible exposición al virus. Cuanto antes, mejor.</p>
+        </div>
+        <div class="prevent-card">
+          <span class="prevent-card__icon">🧪</span>
+          <h3>Testeo</h3>
+          <p>Hacerse el test de VIH es voluntario, gratuito y confidencial. Conocer tu estado es
+          cuidarte a vos y a las personas con las que estás.</p>
+        </div>
+        <div class="prevent-card">
+          <span class="prevent-card__icon">🚫💉</span>
+          <h3>No compartir agujas</h3>
+          <p>No compartir jeringas ni elementos punzantes evita la transmisión por sangre.</p>
+        </div>
+        <div class="prevent-card">
+          <span class="prevent-card__icon">🗣️</span>
+          <h3>Hablarlo sin miedo</h3>
+          <p>Hablar de sexualidad, testeo y cuidados con la pareja y el equipo de salud reduce el
+          estigma y mejora la prevención.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. TRATAMIENTO -->
+  <section id="tratamiento" class="section">
+    <div class="section__inner">
+      <p class="section__kicker">05 · Se puede vivir bien con VIH</p>
+      <h2>Tratamiento</h2>
+      <div class="two-col">
+        <div>
+          <p>
+            El tratamiento se llama <strong>TAR (Tratamiento Antirretroviral)</strong>: combinaciones
+            de medicamentos que se toman diariamente y que <strong>reducen la cantidad de virus en
+            sangre</strong> hasta niveles indetectables.
+          </p>
+          <p>
+            No cura el VIH, pero permite que la persona tenga una <strong>expectativa y calidad de
+            vida similar a la de cualquier otra persona</strong>, y que no transmita el virus por vía
+            sexual (I=I). En Uruguay, el tratamiento se accede de forma gratuita a través del sistema
+            de salud.
+          </p>
+        </div>
+        <div class="card card--dark">
+          <h3>En resumen</h3>
+          <ul class="check-list">
+            <li>Se toma todos los días, de por vida.</li>
+            <li>Baja la carga viral hasta hacerla indetectable.</li>
+            <li>Indetectable = intransmisible por vía sexual.</li>
+            <li>Es gratuito en el sistema de salud uruguayo.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. CUESTIONARIO -->
+  <section id="cuestionario" class="section section--game">
+    <div class="section__inner">
+      <p class="section__kicker">06 · A prueba</p>
+      <h2>Cuestionario final</h2>
+      <p class="section__lead">10 preguntas sobre todo lo que vimos. Cada respuesta correcta suma 1
+      punto, sobre un total de 10.</p>
+
+      <div class="quiz-shell" id="quizShell">
+
+        <!-- Pantalla de inicio -->
+        <div class="quiz-screen is-active" data-screen="start">
+          <div class="quiz-card">
+            <h3>¿Listo para el cuestionario?</h3>
+            <p>10 preguntas de opción múltiple. Tu nota final va de 1 a 10.</p>
+            <p class="best-score" id="bestScoreLabel" hidden></p>
+            <button class="btn btn--primary btn--lg" id="startQuizBtn">Empezar</button>
+          </div>
+        </div>
+
+        <!-- Pregunta -->
+        <div class="quiz-screen" data-screen="question">
+          <div class="quiz-progress">
+            <div class="quiz-progress__bar"><div class="quiz-progress__fill" id="quizProgressFill"></div></div>
+            <span id="quizProgressLabel">Pregunta 1 de 10</span>
+          </div>
+          <div class="quiz-card">
+            <h3 id="quizQuestion">—</h3>
+            <div class="quiz-options" id="quizOptions"></div>
+            <p class="quiz-feedback" id="quizFeedback" hidden></p>
+            <button class="btn btn--primary" id="quizNextBtn" hidden>Siguiente →</button>
+          </div>
+        </div>
+
+        <!-- Resultado -->
+        <div class="quiz-screen" data-screen="result">
+          <div class="quiz-card quiz-card--result">
+            <p class="result-kicker">Tu nota final</p>
+            <div class="result-number" id="resultNumber">0</div>
+            <p class="result-message" id="resultMessage"></p>
+            <button class="btn btn--primary btn--lg" id="retryQuizBtn">Repetir el cuestionario</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FUENTES -->
+  <section id="fuentes" class="section section--alt">
+    <div class="section__inner">
+      <p class="section__kicker">📚 Para saber más</p>
+      <h2>Fuentes</h2>
+      <ul class="sources-list">
+        <li>Organización Mundial de la Salud (OMS) — información técnica sobre VIH/sida.</li>
+        <li>ONUSIDA (Programa Conjunto de las Naciones Unidas sobre el VIH/Sida) — datos epidemiológicos
+        globales.</li>
+        <li>Ministerio de Salud Pública (MSP), Uruguay — guías nacionales de prevención, testeo y
+        tratamiento.</li>
+        <li>Sociedad Uruguaya de Infectología — recomendaciones clínicas sobre TAR y PrEP/PEP.</li>
+      </ul>
+      <p class="section__note">
+        Este es material de apoyo para una clase — no reemplaza la consulta con un profesional de la
+        salud.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Material educativo para uso en el aula.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

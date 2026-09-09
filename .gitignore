@@ -1,0 +1,10 @@
+node_modules/
+npm-debug.log*
+
+# Datos del ranking (se genera solo al arrancar el servidor)
+server/data/leaderboard.json
+
+# Varios
+.DS_Store
+*.log
+.env
